@@ -61,4 +61,3 @@ If you hit one you will lose some of your life, culminating in a game over.
 * find_ship- sets the ship's new location
 * set_obst- Creates and places an obstacle
 * adj_life- Changes the Ship's life count
-

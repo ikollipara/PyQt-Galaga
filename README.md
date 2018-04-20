@@ -3,8 +3,8 @@
 ## Summary
 
 This program aims to create a Top-Down scroller in which you fly a plane around obstacles.
-You move with either the arrow keys or WASD.
-We plan to implement custom controls if possible.
+You move with either the arrow keys or WASD. We plan to implement custom controls if possible.
+Scoring would either be through a traditional scoring system, or a longest time.
 We also want to add in enemies if possible, which also means that your ship could shoot.
 The interface will be made in PyQt to look like a native windows app.
 

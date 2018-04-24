@@ -6,7 +6,7 @@ class Ship(Mobile):
     # I don't know, do we want a player class?
     #
     def __init__(self):
-        pass
+
 
     def move(self):
         pass

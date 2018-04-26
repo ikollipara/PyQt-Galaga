@@ -16,7 +16,3 @@ class Controller(object):
 
     def create_obstacle(self):
         pass
-
-
-
-

@@ -1,6 +1,7 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, QtMultimedia
-from Controller import  Controller
+from Controller import Controller
+
 
 class MainWidget(QtWidgets.QWidget):
     def __init__(self, controller, parent=None):

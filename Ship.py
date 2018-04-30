@@ -23,14 +23,14 @@ class Ship(Mobile):
        self.lives += 1
        return self.lives
 
-   def move(self, dir, dx):
+   def move(self, direction, pixels):
        """Moves ship on screen and resets ship location"""
-       if dir == 'left':
-           self.x -= dx
-       elif dir == 'right':
-           self.x += dx
-       elif dir == 'forward':
-           self.y += dx
-       elif dir == 'back':
-           self.y -= dx
+       if direction == 'left':
+           self.x -= pixels
+       elif direction == 'right':
+           self.x += pixels
+       elif direction == 'forward':
+           self.y += pixels
+       elif direction == 'back':
+           self.y -= pixels
        return self.loc

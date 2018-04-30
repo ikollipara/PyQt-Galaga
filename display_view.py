@@ -22,6 +22,6 @@ class MainWidget(QtWidgets.QWidget):
 
     def keyPressEvent(self, event):
         if event.key() in [QtCore.Qt.Key_D]:
-            Controller.move_right()
+            Controller.move_ship_right()
         elif event.key() in [QtCore.Qt.Key_A]:
-            Controller.move_left()
+            Controller.move_ship_left()

@@ -9,6 +9,9 @@ class Mobile(object):
        self.image = image
        self.x = x
        self.y = y
+       #
+       # edit to be colored pixels in png, not whole box
+       #
        self.height = height
        self.width = width
        self.loc = (self.x, self.y)
@@ -25,11 +28,11 @@ class Mobile(object):
        self.width = width
        return self.height, self.width
 
-   def move(self, dir, dx):
+   def move(self, direction, pixels):
        """Moves ship on screen and resets ship location"""
-       if dir == 'forward':
+       if direction == 'forward':
            #
            # Object forwards moves it down on screen towards player, so self.y -= 1 instead of self.y += 1.
            #
-           self.y -= dx
+           self.y -= pixels
        return self.loc

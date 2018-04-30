@@ -18,8 +18,3 @@ class MainWidget(QtWidgets.QWidget):
         self.background = self.background.scaled(size)
         painter.drawImage(0, 0, self.background)
 
-    def keyPressEvent(self, event):
-        if event.key() in [QtCore.Qt.Key_D]:
-            Controller.move_ship_right()
-        elif event.key() in [QtCore.Qt.Key_A]:
-            Controller.move_ship_left()

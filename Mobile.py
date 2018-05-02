@@ -28,11 +28,21 @@ class Mobile(object):
        self.width = width
        return self.height, self.width
 
-   def move(self, direction, pixels):
+   def lose_life(self):
+       """Removes one life to ship lives"""
+       self.lives -= 1
+       return self.lives
+
+   def gain_life(self):
+       """Adds one life to ship lives"""
+       self.lives += 1
+       return self.lives
+
+   def move(self, pixels):
        """Moves ship on screen and resets ship location"""
-       if direction == 'forward':
-           #
-           # Object forwards moves it down on screen towards player, so self.y -= 1 instead of self.y += 1.
-           #
-           self.y -= pixels
+       #
+       # Object forwards moves it down on screen towards player, so self.y -= 1 instead of self.y += 1.
+       #
+       self.y -= pixels
+       self.loc = (self.x,self.y)
        return self.loc

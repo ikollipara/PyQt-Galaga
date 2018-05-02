@@ -1,3 +1,26 @@
+from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5.QtCore import QEvent
+import sys
+from Mobile import Mobile
+from Ship import Ship
+
 class Controller(object):
     def __init__(self):
-        pass
+        self.obstacles = []
+        self.ship = None
+
+    def move_ship_right(self):
+        location = self.ship.move("right", 3)
+
+    def move_ship_left(self):
+        location = self.ship.move("left", 3)
+
+    def create_obstacle(self):
+        image = "test.png"
+        obstacle = Mobile(image, 10, 10, 900, 800)
+        self.obstacles.append(obstacle)
+
+    def create_ship(self):
+        image = "test.png"
+        ship = Ship(image, 10, 10, 500, 100)
+        self.ship = ship

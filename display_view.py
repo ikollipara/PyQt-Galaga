@@ -18,7 +18,7 @@ class MainWidget(QtWidgets.QWidget):
     def timer_setup(self):
         timer = QtCore.QTimer(self)
         timer.timeout.connect(self.update)
-        timer.start(100)
+        timer.start(10)
 
     def paintEvent(self, QPaintEvent):
         painter = QtGui.QPainter(self)

@@ -11,6 +11,13 @@ class MainWidget(QtWidgets.QWidget):
         self.background = QtGui.QImage(self.width(), self.height(), QtGui.QImage.Format_RGB32)
         self.background.fill(1)
         self.ship = QtGui.QPixmap('.\Images\ShipIcon.PNG')
+        self.timer_setup()
+
+
+    def timer_setup(self):
+        timer = QtCore.QTimer(self)
+        timer.timeout.connect(self.update)
+        timer.start(100)
 
     def paintEvent(self, QPaintEvent):
         painter = QtGui.QPainter(self)
@@ -18,10 +25,11 @@ class MainWidget(QtWidgets.QWidget):
         pixSize = self.ship.size()
         self.background = self.background.scaled(size)
         painter.drawImage(0, 0, self.background)
-        painter.drawPixmap(100, 100, self.ship)
+        painter.drawPixmap(0, 0, self.ship)
 
     def keyPressEvent(self, event):
         if event.key() in [QtCore.Qt.Key_D]:
             Controller.move_ship_right()
         elif event.key() in [QtCore.Qt.Key_A]:
             Controller.move_ship_left()
+

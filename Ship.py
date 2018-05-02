@@ -1,4 +1,4 @@
-from PyQt5.QtCore.QByteArray import size
+from PyQt5.QtCore import QByteArray
 
 from Mobile import Mobile
 

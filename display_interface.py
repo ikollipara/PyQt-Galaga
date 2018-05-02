@@ -59,3 +59,9 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
         elif event.key() in [QtCore.Qt.Key_A]:
             self.controller.move_ship_left()
             self.update()
+        elif event.key() in [QtCore.Qt.Key_W]:
+            self.controller.move_ship_forward()
+            self.update()
+        elif event.key() in [QtCore.Qt.Key_S]:
+            self.controller.move_ship_back()
+            self.update()

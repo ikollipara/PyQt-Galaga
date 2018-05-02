@@ -20,8 +20,8 @@ class Ship(Mobile):
        elif direction == 'right':
            self.x += pixels
        elif direction == 'forward':
-           self.y += pixels
-       elif direction == 'back':
            self.y -= pixels
+       elif direction == 'back':
+           self.y += pixels
        self.loc = [self.x, self.y]
        return self.loc

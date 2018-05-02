@@ -15,6 +15,12 @@ class Controller(object):
     def move_ship_left(self):
         self.ship.move("left", 15)
 
+    def move_ship_forward(self):
+        self.ship.move("forward",15)
+
+    def move_ship_back(self):
+        self.ship.move("back",15)
+
     def create_obstacle(self):
         image = "test.png"
         obstacle = Mobile(image, 10, 10, 900, 800)

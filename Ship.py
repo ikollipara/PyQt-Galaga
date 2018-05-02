@@ -1,4 +1,4 @@
-from PyQt5.QtCore.QByteArray import size
+
 
 from Mobile import Mobile
 
@@ -8,20 +8,9 @@ class Ship(Mobile):
    #
    # Maybe add player class?
    #
-   def __init__(self, lives=3):
+   def __init__(self, image, height, width, x, y, lives=3):
        """ Inherits __init__ from Mobile class. Always starts with 3 lives instead of 1."""
-       self.lives = lives
-       super().__init__(self)
-
-   def lose_life(self):
-       """Removes one life to ship lives"""
-       self.lives -= 1
-       return self.lives
-
-   def gain_life(self):
-       """Adds one life to ship lives"""
-       self.lives += 1
-       return self.lives
+       super().__init__(image, height, width, x, y, lives=3)
 
    def move(self, direction, pixels):
        """Moves ship on screen and resets ship location"""

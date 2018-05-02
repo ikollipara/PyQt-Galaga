@@ -14,7 +14,7 @@ class Mobile(object):
        #
        self.height = height
        self.width = width
-       self.loc = (self.x, self.y)
+       self.loc = [self.x, self.y]
        self.lives = lives
 
    def change_image(self, image):
@@ -44,5 +44,5 @@ class Mobile(object):
        # Object forwards moves it down on screen towards player, so self.y -= 1 instead of self.y += 1.
        #
        self.y -= pixels
-       self.loc = (self.x,self.y)
+       self.loc = [self.x,self.y]
        return self.loc

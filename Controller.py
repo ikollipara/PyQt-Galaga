@@ -10,10 +10,10 @@ class Controller(object):
         self.ship = Ship(None, 3, 3, 0, 0)
 
     def move_ship_right(self):
-        self.ship.move("right", 3)
+        self.ship.move("right", 15)
 
     def move_ship_left(self):
-        self.ship.move("left", 3)
+        self.ship.move("left", 15)
 
     def create_obstacle(self):
         image = "test.png"

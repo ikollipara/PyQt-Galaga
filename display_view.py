@@ -28,9 +28,7 @@ class MainWidget(QtWidgets.QWidget):
         painter.drawImage(0, 0, self.background)
         painter.drawPixmap(self.controller.ship.loc[0], self.controller.ship.loc[1], self.ship)
 
-    def keyPressEvent(self, event):
-        if event.key() in [QtCore.Qt.Key_D]:
-            Controller.move_ship_right()
-        elif event.key() in [QtCore.Qt.Key_A]:
-            Controller.move_ship_left()
+
+
+
 

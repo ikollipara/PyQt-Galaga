@@ -51,3 +51,11 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
 
     def high_scores(self):
         QtWidgets.QMessageBox.about(self, 'Atario High Scores', """Test""")
+
+    def keyPressEvent(self, event):
+        if event.key() in [QtCore.Qt.Key_D]:
+            self.controller.move_ship_right()
+            self.update()
+        elif event.key() in [QtCore.Qt.Key_A]:
+            self.controller.move_ship_left()
+            self.update()

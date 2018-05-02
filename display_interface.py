@@ -14,6 +14,7 @@ class GameWindow(QtWidgets.QMainWindow):
         self.display.show()
         self.create_actions()
         self.create_menus()
+        self.create_lifeBar()
 
     def setup_window(self):
         xSize = 1000
@@ -36,6 +37,10 @@ class GameWindow(QtWidgets.QMainWindow):
         self.menu.addAction(self.scoresAction)
         self.menu.addAction(self.aboutAction)
 
+    def create_lifeBar(self):
+        self.statusBar().showMessage("Lives:{}".format(0))
+
+
     def quit(self):
         self.close()
 
@@ -46,11 +51,3 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
 
     def high_scores(self):
         QtWidgets.QMessageBox.about(self, 'Atario High Scores', """Test""")
-
-# region Test Main
-pyQtApp = QtWidgets.QApplication(sys.argv)
-x = GameWindow(pyQtApp)
-x.show()
-exitCondition = pyQtApp.exec_()
-sys.exit(exitCondition)
-# endregion

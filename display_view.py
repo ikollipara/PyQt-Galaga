@@ -26,7 +26,7 @@ class MainWidget(QtWidgets.QWidget):
         pixSize = self.ship.size()
         self.background = self.background.scaled(size)
         painter.drawImage(0, 0, self.background)
-        painter.drawPixmap(0, 0, self.ship)
+        painter.drawPixmap(self.controller.ship.loc[0], self.controller.ship.loc[1], self.ship)
 
     def keyPressEvent(self, event):
         if event.key() in [QtCore.Qt.Key_D]:

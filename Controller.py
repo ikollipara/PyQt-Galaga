@@ -7,13 +7,13 @@ from Ship import Ship
 class Controller(object):
     def __init__(self):
         self.obstacles = []
-        self.ship = None
+        self.ship = Ship(None, 3, 3, 0, 0)
 
     def move_ship_right(self):
-        location = self.ship.move("right", 3)
+        self.ship.move("right", 3)
 
     def move_ship_left(self):
-        location = self.ship.move("left", 3)
+        self.ship.move("left", 3)
 
     def create_obstacle(self):
         image = "test.png"

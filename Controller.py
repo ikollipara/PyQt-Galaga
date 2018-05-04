@@ -12,16 +12,20 @@ class Controller(object):
         self.world = World()
 
     def move_ship_right(self, pixels):
-        self.ship.move("right", pixels)
+        loc = self.ship.move("right", pixels)
+        self.world.update_positions(loc, self.ship.height, self.ship.width)
 
     def move_ship_left(self, pixels):
-        self.ship.move("left", pixels)
+        loc = self.ship.move("left", pixels)
+        self.world.update_positions(loc, self.ship.height, self.ship.width)
 
     def move_ship_forward(self, pixels):
-        self.ship.move("forward", pixels)
+        loc = self.ship.move("forward", pixels)
+        self.world.update_positions(loc, self.ship.height, self.ship.width)
 
     def move_ship_back(self, pixels):
-        self.ship.move("back", pixels)
+        loc = self.ship.move("back", pixels)
+        self.world.update_positions(loc, self.ship.height, self.ship.width)
 
     def create_obstacle(self):
         image = "Untitled.png"

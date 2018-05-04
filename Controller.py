@@ -7,22 +7,22 @@ from Ship import Ship
 class Controller(object):
     def __init__(self):
         self.obstacles = []
-        self.ship = Ship(None, 3, 3, 0, 0)
+        self.ship = Ship(None, 3, 3, 100, 150)
 
-    def move_ship_right(self):
-        self.ship.move("right", 15)
+    def move_ship_right(self, pixels):
+        self.ship.move("right", pixels)
 
-    def move_ship_left(self):
-        self.ship.move("left", 15)
+    def move_ship_left(self, pixels):
+        self.ship.move("left", pixels)
 
-    def move_ship_forward(self):
-        self.ship.move("forward",15)
+    def move_ship_forward(self, pixels):
+        self.ship.move("forward", pixels)
 
-    def move_ship_back(self):
-        self.ship.move("back",15)
+    def move_ship_back(self, pixels):
+        self.ship.move("back", pixels)
 
     def create_obstacle(self):
-        image = "test.png"
+        image = "Untitled.png"
         obstacle = Mobile(image, 10, 10, 900, 800)
         self.obstacles.append(obstacle)
 

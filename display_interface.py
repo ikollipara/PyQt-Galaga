@@ -53,23 +53,23 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
 
     def keyPressEvent(self, event):
         if event.key() in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
-            pixels = 15
+            pixels = 10
             if self.controller.ship.x > self.width():
                 pixels = self.width() - self.controller.ship.x
             self.controller.move_ship_right(pixels)
             self.update()
         elif event.key() in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
-            pixels = 15
+            pixels = 10
             if not self.controller.ship.x < 0:
                 self.controller.move_ship_left(pixels)
             self.update()
         elif event.key() in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
-            pixels = 15
+            pixels = 10
             if not self.controller.ship.y < 0:
                 self.controller.move_ship_forward(pixels)
             self.update()
         elif event.key() in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
-            pixels = 15
+            pixels = 10
             if self.controller.ship.y > self.height():
                 pixels = self.height() - self.controller.ship.y
             self.controller.move_ship_back(pixels)

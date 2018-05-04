@@ -8,7 +8,7 @@ from World import World
 class Controller(object):
     def __init__(self):
         self.obstacles = []
-        self.ship = Ship(None, 3, 3, 100, 150)
+        self.ship = Ship(None, 4, 4, 460, 770)
         self.world = World()
 
     def move_ship_right(self, pixels):

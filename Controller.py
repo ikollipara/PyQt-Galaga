@@ -3,6 +3,7 @@ from PyQt5.QtCore import QEvent
 import sys
 from Mobile import Mobile
 from Ship import Ship
+from random import randint
 
 class Controller(object):
     def __init__(self):
@@ -22,9 +23,12 @@ class Controller(object):
         self.ship.move("back", pixels)
 
     def create_obstacle(self):
-        image = "Untitled.png"
-        obstacle = Mobile(image, 10, 10, 900, 800)
-        self.obstacles.append(obstacle)
+        #obsDict = {'long': [10, 20],
+        #           'fat': [20, 10]}
+        #obsList = obsDict.keys()
+        #image = obsList[randint(0, 1)]
+        obstacle = Mobile(None, 100, 100, 0, 0)
+        return obstacle
 
     def create_ship(self):
         image = "test.png"

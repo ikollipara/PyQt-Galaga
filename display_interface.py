@@ -32,14 +32,6 @@ class GameWindow(QtWidgets.QMainWindow):
         self.aboutAction = QtWidgets.QAction("&About", self, statusTip="More information about the program", triggered=self.about)
         self.scoresAction = QtWidgets.QAction('H&igh Scores', self, statusTip='Current High Scores', triggered=self.high_scores)
 
-    def keyPressEvent(self, event):
-        if event.key() in [QtCore.Qt.Key_D]:
-            self.controller.move_ship_right()
-            print("D")
-        elif event.key() in [QtCore.Qt.Key_A]:
-            self.controller.move_ship_left()
-            print("A")
-
     def create_menus(self):
         self.menu = self.menuBar()
         self.menu.addAction(self.scoresAction)
@@ -47,7 +39,6 @@ class GameWindow(QtWidgets.QMainWindow):
 
     def create_lifeBar(self):
         self.statusBar().showMessage("Lives:{}".format(self.controller.ship.lives))
-
 
     def quit(self):
         self.close()

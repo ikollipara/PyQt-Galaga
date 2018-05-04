@@ -10,17 +10,22 @@ class Controller(object):
         self.obstacles = []
         self.ship = Ship(None, 3, 3, 100, 150)
         self.world = World()
+        self.keys = []
 
     def move_ship_right(self, pixels):
+        self.keys.append("right")
         self.ship.move("right", pixels)
 
     def move_ship_left(self, pixels):
+        self.keys.append("left")
         self.ship.move("left", pixels)
 
     def move_ship_forward(self, pixels):
+        self.keys.append("up")
         self.ship.move("forward", pixels)
 
     def move_ship_back(self, pixels):
+        self.keys.append("down")
         self.ship.move("back", pixels)
 
     def create_obstacle(self):

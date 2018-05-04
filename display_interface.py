@@ -14,6 +14,7 @@ class GameWindow(QtWidgets.QMainWindow):
         self.display.show()
         self.create_actions()
         self.create_menus()
+        self.create_lifeBar()
 
     def setup_window(self):
         xSize = 1000
@@ -44,6 +45,10 @@ class GameWindow(QtWidgets.QMainWindow):
         self.menu.addAction(self.scoresAction)
         self.menu.addAction(self.aboutAction)
 
+    def create_lifeBar(self):
+        self.statusBar().showMessage("Lives:{}".format(self.controller.ship.lives))
+
+
     def quit(self):
         self.close()
 
@@ -55,10 +60,26 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
     def high_scores(self):
         QtWidgets.QMessageBox.about(self, 'Atario High Scores', """Test""")
 
-# region Test Main
-pyQtApp = QtWidgets.QApplication(sys.argv)
-x = GameWindow(pyQtApp)
-x.show()
-exitCondition = pyQtApp.exec_()
-sys.exit(exitCondition)
-# endregion
+    def keyPressEvent(self, event):
+        if event.key() in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
+            pixels = 15
+            if self.controller.ship.x > self.width():
+                pixels = self.width() - self.controller.ship.x
+            self.controller.move_ship_right(pixels)
+            self.update()
+        elif event.key() in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
+            pixels = 15
+            if not self.controller.ship.x < 0:
+                self.controller.move_ship_left(pixels)
+            self.update()
+        elif event.key() in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
+            pixels = 15
+            if not self.controller.ship.y < 0:
+                self.controller.move_ship_forward(pixels)
+            self.update()
+        elif event.key() in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
+            pixels = 15
+            if self.controller.ship.y > self.height():
+                pixels = self.height() - self.controller.ship.y
+            self.controller.move_ship_back(pixels)
+            self.update()

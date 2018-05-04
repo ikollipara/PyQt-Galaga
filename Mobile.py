@@ -9,9 +9,12 @@ class Mobile(object):
        self.image = image
        self.x = x
        self.y = y
+       #
+       # edit to be colored pixels in png, not whole box
+       #
        self.height = height
        self.width = width
-       self.loc = (self.x, self.y)
+       self.loc = [self.x, self.y]
        self.lives = lives
 
    def change_image(self, image):
@@ -25,11 +28,21 @@ class Mobile(object):
        self.width = width
        return self.height, self.width
 
-   def move(self, dir, dx):
+   def lose_life(self):
+       """Removes one life to ship lives"""
+       self.lives -= 1
+       return self.lives
+
+   def gain_life(self):
+       """Adds one life to ship lives"""
+       self.lives += 1
+       return self.lives
+
+   def move(self, pixels):
        """Moves ship on screen and resets ship location"""
-       if dir == 'forward':
-           #
-           # Object forwards moves it down on screen towards player, so self.y -= 1 instead of self.y += 1.
-           #
-           self.y -= dx
+       #
+       # Object forwards moves it down on screen towards player, so self.y -= 1 instead of self.y += 1.
+       #
+       self.y -= pixels
+       self.loc = [self.x,self.y]
        return self.loc

@@ -9,11 +9,10 @@ class Controller(object):
     def __init__(self):
         self.obstacles = []
         self.ship = Ship(None, 3, 3, 100, 150)
+        self.world = World()
 
     def move_ship_right(self, pixels):
         self.ship.move("right", pixels)
-        self.ship = None
-        self.world = World()
 
     def move_ship_left(self, pixels):
         self.ship.move("left", pixels)
@@ -23,9 +22,6 @@ class Controller(object):
 
     def move_ship_back(self, pixels):
         self.ship.move("back", pixels)
-    def move_ship_left(self):
-        location = self.ship.move("left", 3)
-        self.world.update_positions(location, self.ship.height, self.ship.width)
 
     def create_obstacle(self):
         image = "Untitled.png"

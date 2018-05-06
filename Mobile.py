@@ -43,6 +43,6 @@ class Mobile(object):
        #
        # Object forwards moves it down on screen towards player, so self.y -= 1 instead of self.y += 1.
        #
-       self.y -= pixels
+       self.y += pixels
        self.loc = [self.x, self.y]
        return self.loc

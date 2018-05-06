@@ -8,7 +8,6 @@ from random import randint
 
 class Controller(object):
     def __init__(self):
-        self.obstacles = []
         self.ship = Ship(None, 4, 4, 460, 770)
         self.world = World()
         self.keys = []
@@ -38,11 +37,9 @@ class Controller(object):
         self.ship.move("back", pixels)
 
     def create_obstacle(self):
-        #obsDict = {'long': [10, 20],
-        #           'fat': [20, 10]}
-        #obsList = obsDict.keys()
-        #image = obsList[randint(0, 1)]
-        obstacle = Mobile(None, 100, 100, 0, 0)
+        sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50]]
+        size = sizes[randint(0, 7)]
+        obstacle = Mobile(None, size[0], size[1], 0, 0)
         return obstacle
 
     def create_ship(self):

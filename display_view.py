@@ -1,7 +1,7 @@
-
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, QtMultimedia
 from Controller import Controller
+from random import randint
 
 
 class MainWidget(QtWidgets.QWidget):
@@ -10,35 +10,32 @@ class MainWidget(QtWidgets.QWidget):
         self.obstacles = []
         self.controller = controller
         self.layout = QtWidgets.QGraphicsGridLayout()
-        self.background = QtGui.QImage(self.width(), self.height(), QtGui.QImage.Format_RGB32)
-        self.background.fill(1)
+        #self.background = QtGui.QImage(self.width(), self.height(), QtGui.QImage.Format_RGB32)
+        self.background = QtGui.QPixmap('.\Images\Tie-dye.jpg')
+        #self.background.fill(1)
         self.ship = QtGui.QPixmap('.\Images\ShipIcon.PNG')
-        self.test()
         self.setup_obs_creation_timer()
         self.screen_timer()
 
     def setup_obs_creation_timer(self):
         self.Timer = QtCore.QTimer()
-        self.Timer.timeout.connect(self.show_obstacles)
-        self.Timer.start(5000)
+        self.Timer.timeout.connect(self.paint_obstacles)
+        self.Timer.start(1000)
 
     def screen_timer(self):
         self.moveTimer = QtCore.QTimer()
         self.moveTimer.timeout.connect(self.move_obstacles)
-        self.moveTimer.start(10)
+        self.moveTimer.start(50)
 
-    def show_obstacles(self):
+    def paint_obstacles(self):
         obs = self.controller.create_obstacle()
-        obsImage = QtGui.QImage(obs.width, obs.height, QtGui.QImage.Format_RGB32)
-        obsImage.fill(0)
-        obs.image = obsImage
+        obs.x = randint(0, self.width())
+        obs.image = QtGui.QImage(obs.width, obs.height, QtGui.QImage.Format_RGB32)
+        colors = ['#b0c56f', '#ffd700', '#cc0000', '#a43931', '#006666', '#ff66cd', '#bdc3c7', '#350715', '#6f85c5',
+                  '#7eb546', '#19a35e', '#663399']
+        color = colors[randint(0, len(colors)-1)]
+        obs.image.fill(QtGui.QColor(color))
         self.obstacles.append(obs)
-
-    def test(self):
-        self.obs = self.controller.create_obstacle()
-        self.obsImage = QtGui.QImage(self.obs.width, self.obs.height, QtGui.QImage.Format_RGB32)
-        self.obsImage.fill(QtGui.QColor('#ffffff'))
-
 
     def move_obstacles(self):
         pixels = 10
@@ -53,9 +50,13 @@ class MainWidget(QtWidgets.QWidget):
         size = self.size()
         pixSize = self.ship.size()
         self.background = self.background.scaled(size)
-        painter.drawImage(0, 0, self.background)
+        #painter.drawImage(0, 0, self.background)
+        painter.drawPixmap(0, 0, self.background)
         painter.drawPixmap(self.controller.ship.loc[0], self.controller.ship.loc[1], self.ship)
-        painter.drawImage(self.obs.x, self.obs.y, self.obsImage)
+        if len(self.obstacles) > 0:
+            for obstacle in self.obstacles:
+                painter.drawImage(obstacle.x, obstacle.y, obstacle.image)
+
 
 
 

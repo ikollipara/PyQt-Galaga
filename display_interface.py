@@ -32,6 +32,9 @@ class GameWindow(QtWidgets.QMainWindow):
     def create_actions(self):
         self.aboutAction = QtWidgets.QAction("&About", self, statusTip="More information about the program", triggered=self.about)
         self.scoresAction = QtWidgets.QAction('H&igh Scores', self, statusTip='Current High Scores', triggered=self.high_scores)
+        self.lifeAction = QtWidgets.QAction(QtGui.QIcon('.\Images\Hearts.PNG'), "Life", self)
+
+
 
     def create_menus(self):
         self.menu = self.menuBar()
@@ -39,7 +42,13 @@ class GameWindow(QtWidgets.QMainWindow):
         self.menu.addAction(self.aboutAction)
 
     def create_lifeBar(self):
-        self.statusBar().showMessage("Lives:{}".format(self.controller.ship.lives))
+        self.LifeBar = self.addToolBar('Lives')
+        self.LifeBar.addAction(self.lifeAction)
+
+
+
+
+
 
     def quit(self):
         self.close()

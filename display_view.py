@@ -20,12 +20,12 @@ class MainWidget(QtWidgets.QWidget):
     def setup_obs_creation_timer(self):
         self.Timer = QtCore.QTimer()
         self.Timer.timeout.connect(self.paint_obstacles)
-        self.Timer.start(1000)
+        self.Timer.start(500)
 
     def screen_timer(self):
         self.moveTimer = QtCore.QTimer()
         self.moveTimer.timeout.connect(self.move_obstacles)
-        self.moveTimer.start(50)
+        self.moveTimer.start(60)
 
     def paint_obstacles(self):
         obs = self.controller.create_obstacle()

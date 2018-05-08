@@ -44,11 +44,26 @@ class GameWindow(QtWidgets.QMainWindow):
     def create_lifeBar(self):
         self.LifeBar = self.addToolBar('Lives')
         self.LifeBar.addAction(self.lifeAction)
+        lifeCount = QtWidgets.QLabel(self)
+        lifeCount.setText('{}'.format(self.controller.ship.lives))
+        self.LifeBar.addWidget(lifeCount)
+        time = self.setup_UserTime()
+        userTime = QtWidgets.QLabel(self)
+        userTime.setText('{}'.format(time))
+        self.LifeBar.addWidget(userTime)
 
-
-
-
-
+    def setup_UserTime(self):
+        time = self.display.userTime
+        if time % 60 == 0:
+            time = time/60
+            time = int(time)
+            time = str(time) + '00'
+            time = int(time)
+        if len(str(time)) >= 3:
+            showTime = str(time)[:-2] + ':' + str(time)[-2:]
+        else:
+            showTime = str(time)
+        return showTime
 
     def quit(self):
         self.close()

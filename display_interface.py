@@ -15,7 +15,7 @@ class GameWindow(QtWidgets.QMainWindow):
         self.display.show()
         self.create_actions()
         self.create_menus()
-        self.setup_statusBar()
+        # self.setup_statusBar()
 
 
     def setup_window(self):

@@ -42,6 +42,7 @@ class Controller(object):
         sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50]]
         size = sizes[randint(0, 7)]
         obstacle = Mobile(None, size[0], size[1], 0, 0)
+        self.world.update_obstacle_position(obstacle.loc, obstacle.height, obstacle.width)
         return obstacle
 
     def create_ship(self):
@@ -55,3 +56,4 @@ class Controller(object):
             obs.move(pixels)
             if obs.y > self.screenWidth:
                 self.obstacles.remove(obs)
+            self.world.update_obstacle_position(obs.loc, obs.height, obs.width)

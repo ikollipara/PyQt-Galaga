@@ -15,7 +15,8 @@ class GameWindow(QtWidgets.QMainWindow):
         self.display.show()
         self.create_actions()
         self.create_menus()
-        self.create_lifeBar()
+        self.setup_statusBar()
+
 
     def setup_window(self):
         xSize = 1000
@@ -35,22 +36,15 @@ class GameWindow(QtWidgets.QMainWindow):
         self.lifeAction = QtWidgets.QAction(QtGui.QIcon('.\Images\Hearts.PNG'), "Life", self)
 
 
-
     def create_menus(self):
         self.menu = self.menuBar()
         self.menu.addAction(self.scoresAction)
         self.menu.addAction(self.aboutAction)
 
-    def create_lifeBar(self):
-        self.LifeBar = self.addToolBar('Lives')
-        self.LifeBar.addAction(self.lifeAction)
-        lifeCount = QtWidgets.QLabel(self)
-        lifeCount.setText('{}'.format(self.controller.ship.lives))
-        self.LifeBar.addWidget(lifeCount)
-        time = self.setup_UserTime()
-        userTime = QtWidgets.QLabel(self)
-        userTime.setText('{}'.format(time))
-        self.LifeBar.addWidget(userTime)
+
+    # def setup_statusBar(self):
+    #     self.bar = self.statusBar()
+    #     self.bar
 
     def setup_UserTime(self):
         time = self.display.userTime

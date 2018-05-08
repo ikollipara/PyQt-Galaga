@@ -38,6 +38,11 @@ class MainWidget(QtWidgets.QWidget):
         self.gTimer.timeout.connect(self.update)
         self.gTimer.start(10)
 
+    def collision_timer(self):
+        self.cTimer = QtCore.QTimer()
+        self.cTimer.timeout.connect(self.controller.world.detect_collision)
+        self.cTimer.start(10)
+
     def add_second(self):
         self.userTime += 1
 

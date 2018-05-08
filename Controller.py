@@ -9,16 +9,18 @@ from random import randint
 class Controller(object):
     def __init__(self):
         self.ship = Ship(None, 4, 4, 460, 770)
+        self.obstacles = []
         self.world = World()
         self.keys = {
             "right" : False,
             "left" : False,
             "up" : False,
             "down" : False}
+        self.screenWidth = None
 
     def move_ship_right(self, pixels):
         loc = self.ship.move("right", pixels)
-        self.world.update_positions(loc, self.ship.height, self.ship.width)
+        self.world.update_ship_position(loc, self.ship.height, self.ship.width)
         self.ship.move("right", pixels)
 
     def move_ship_left(self, pixels):
@@ -40,6 +42,7 @@ class Controller(object):
         sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50]]
         size = sizes[randint(0, 7)]
         obstacle = Mobile(None, size[0], size[1], 0, 0)
+        self.world.update_obstacle_position(obstacle.loc, obstacle.height, obstacle.width)
         return obstacle
 
     def create_ship(self):
@@ -48,6 +51,9 @@ class Controller(object):
         self.ship = ship
 
     def move_obstacles(self):
-        for obstacle in self.obstacles:
-            location = obstacle.move("forward", 3)
-            self.world.update_positions(location, self.ship.height, self.ship.width)
+        pixels = 10
+        for obs in self.obstacles:
+            obs.move(pixels)
+            if obs.y > self.screenWidth:
+                self.obstacles.remove(obs)
+            self.world.update_obstacle_position(obs.loc, obs.height, obs.width)

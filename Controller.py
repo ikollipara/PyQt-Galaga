@@ -9,8 +9,10 @@ from random import randint
 class Controller(object):
     def __init__(self):
         self.ship = Ship(None, 4, 4, 460, 770)
+        self.obstacles = []
         self.world = World()
         self.keys = []
+        self.screenWidth = None
 
     def move_ship_right(self, pixels):
         loc = self.ship.move("right", pixels)
@@ -47,6 +49,9 @@ class Controller(object):
         ship = Ship(image, 10, 10, 500, 100)
         self.ship = ship
 
-    def move_obstacle(self, obstacle):
-        location = obstacle.move("forward", 3)
-        self.world.update_obstacle_position(location, self.ship.height, self.ship.width)
+    def move_obstacles(self):
+        pixels = 10
+        for obs in self.obstacles:
+            obs.move(pixels)
+            if obs.y > self.screenWidth:
+                self.obstacles.remove(obs)

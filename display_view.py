@@ -18,7 +18,7 @@ class MainWidget(QtWidgets.QWidget):
         self.screen_timer()
         self.user_timer()
         self.game_timer()
-        #self.collision_timer()
+
 
     def setup_obs_creation_timer(self):
         self.Timer = QtCore.QTimer()

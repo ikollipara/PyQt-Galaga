@@ -18,25 +18,20 @@ class Controller(object):
             "down" : False}
         self.screenWidth = None
 
-    def move_ship_right(self, pixels):
-        loc = self.ship.move("right", pixels)
-        self.world.update_ship_position(loc, self.ship.height, self.ship.width)
-        self.ship.move("right", pixels)
-
-    def move_ship_left(self, pixels):
-        loc = self.ship.move("left", pixels)
-        self.world.update_positions(loc, self.ship.height, self.ship.width)
-        self.ship.move("left", pixels)
-
-    def move_ship_forward(self, pixels):
-        loc = self.ship.move("forward", pixels)
-        self.world.update_positions(loc, self.ship.height, self.ship.width)
-        self.ship.move("forward", pixels)
-
-    def move_ship_back(self, pixels):
-        loc = self.ship.move("back", pixels)
-        self.world.update_positions(loc, self.ship.height, self.ship.width)
-        self.ship.move("back", pixels)
+    def move_ship(self):
+        #
+        #   simplified into 1 method as opposed to 4
+        #
+        pixels = 10
+        directions = []
+        for key in self.keys:
+            if key.value == True:
+                directions.append(key)
+        for direction in directions:
+            while self.keys[direction] == True:
+                loc = self.ship.move(direction, pixels)
+                self.world.update_ship_position(loc, self.ship.height, self.ship.width)
+                self.ship.move(direction, pixels)
 
     def create_obstacle(self):
         sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50]]

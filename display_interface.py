@@ -80,38 +80,39 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
 
 
     def keyPressEvent(self, event):
+        #
+        #   connect method to timer in order for movement to work
+        #       updates values correctly. timer must see if controller.keys[value] == True
+        #       while value == True: move_ship (simplified method in
+        #
         key = event.key()
         if key in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
             self.controller.keys["right"] = True
             direction = "right"
-            print("right = True")
         elif key in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
-            self.controller.keys["right"] = True
+            self.controller.keys["left"] = True
             direction = "left"
-            print("left = True")
         elif key in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
-            self.controller.keys["right"] = True
+            self.controller.keys["up"] = True
             direction = "up"
-            print("up = True")
         elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
-            self.controller.keys["right"] = True
+            self.controller.keys["down"] = True
             direction = "down"
-            print("down = True")
-        return direction
+        #loc = self.controller.ship.move(direction, pixels)
+        #self.controller.world.update_ship_position(loc, self.ship.height, self.ship.width)
+        #self.controller.ship.move(direction, pixels)
+        print(self.controller.ship.loc)
+
 
     def keyReleaseEvent(self, event):
         key = event.key()
         if not event.isAutoRepeat():
             if key in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
                 self.controller.keys["right"] = False
-                print("right = False")
             elif key in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
-                self.controller.keys["right"] = False
-                print("left = False")
+                self.controller.keys["left"] = False
             elif key in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
-                self.controller.keys["right"] = False
-                print("up = False")
+                self.controller.keys["up"] = False
             elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
-                self.controller.keys["right"] = False
-                print("down = False")
+                self.controller.keys["down"] = False
 

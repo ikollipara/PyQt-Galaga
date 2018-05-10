@@ -88,21 +88,44 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
         key = event.key()
         if key in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
             self.controller.keys["right"] = True
-            direction = "right"
+            #direction = "right"
         elif key in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
             self.controller.keys["left"] = True
-            direction = "left"
+            #direction = "left"
         elif key in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
             self.controller.keys["up"] = True
-            direction = "up"
+            #direction = "up"
         elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
             self.controller.keys["down"] = True
-            direction = "down"
-        loc = self.controller.ship.move(direction, 10)
-        self.controller.world.update_ship_position(loc, self.controller.ship.height, self.controller.ship.width)
-        self.controller.ship.move(direction, 10)
+            #direction = "down"
+        self.processKeyEvent(event)
         print(self.controller.ship.loc)
 
+    def processKeyEvent(self, event):
+        isPress = event.modifiers()
+        key = event.key()
+        directions  = {
+            "right":[QtCore.Qt.Key_D, QtCore.Qt.Key_Right],
+            "left":[QtCore.Qt.Key_A, QtCore.Qt.Key_Left],
+            "up":[QtCore.Qt.Key_W, QtCore.Qt.Key_Up],
+            "down":[QtCore.Qt.Key_S, QtCore.Qt.Key_Down]
+        }
+        if key in directions["right"]:
+            direction = "right"
+        elif key in directions["left"]:
+            direction = "left"
+        elif key in directions["up"]:
+            direction = "up"
+        elif key in directions["down"]:
+            direction = "down"
+        pixels = 10
+        if isPress == True:
+            loc = self.controller.ship.move(direction, pixels)
+            self.controller.world.update_ship_position(loc, self.controller.ship.height, self.controller.ship.width)
+            self.controller.ship.move(direction, pixels)
+            self.update()
+        else:
+            pass
 
     def keyReleaseEvent(self, event):
         key = event.key()
@@ -115,4 +138,5 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
                 self.controller.keys["up"] = False
             elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
                 self.controller.keys["down"] = False
+            self.processKeyEvent(event)
 

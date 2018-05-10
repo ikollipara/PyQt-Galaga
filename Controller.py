@@ -32,6 +32,7 @@ class Controller(object):
                 loc = self.ship.move(direction, pixels)
                 self.world.update_ship_position(loc, self.ship.height, self.ship.width)
                 self.ship.move(direction, pixels)
+        return loc
 
     def create_obstacle(self):
         sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50]]

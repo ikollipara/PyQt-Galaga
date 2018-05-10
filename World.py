@@ -19,12 +19,14 @@ class World(object):
         self.shipLocations = (bottomleft, topRight)
 
     def detect_collision(self):
+        collided = False
         for obstacleLocation in self.obstacleLocations:
             bottomLeftX = obstacleLocation[0][0]
             bottomLeftY = obstacleLocation[0][1]
-            if bottomLeftX >= self.shipLocations[0][0] and bottomLeftX <= self.shipLocations[1][0]:
-                if bottomLeftY >= self.shipLocations[1][1] and bottomLeftY <= self.shipLocations[0][1]:
-                    collided = True
+            if type(self.shipLocations) == type(()):
+                if bottomLeftX >= self.shipLocations[0][0] and bottomLeftX <= self.shipLocations[1][0]:
+                    if bottomLeftY >= self.shipLocations[1][1] and bottomLeftY <= self.shipLocations[0][1]:
+                        collided = True
         return collided
 
 

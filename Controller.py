@@ -44,14 +44,18 @@ class Controller(object):
         obstacle = Mobile(None, size[0], size[1], 0, 0)
         return obstacle
 
-    def create_ship(self):
-        image = "test.png"
-        ship = Ship(image, 10, 10, 500, 100)
-        self.ship = ship
 
     def move_obstacles(self):
         pixels = 10
         for obs in self.obstacles:
             obs.move(pixels)
+            self.world.update_obstacle_position(obs.loc, obs.height, obs.width)
             if obs.y > self.screenWidth:
                 self.obstacles.remove(obs)
+
+    def lose_life(self):
+        bool = self.world.detect_collision()
+        if bool:
+            self.ship.lose_life()
+        else:
+            pass

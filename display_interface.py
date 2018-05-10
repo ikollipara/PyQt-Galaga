@@ -16,6 +16,7 @@ class GameWindow(QtWidgets.QMainWindow):
         self.create_actions()
         self.create_menus()
         self.setup_statusBar()
+        self.statusTimer()
 
 
     def setup_window(self):
@@ -41,22 +42,29 @@ class GameWindow(QtWidgets.QMainWindow):
         self.menu.addAction(self.scoresAction)
         self.menu.addAction(self.aboutAction)
 
+    def statusTimer(self):
+        self.statTimer = QtCore.QTimer()
+        self.statTimer.timeout.connect(self.setup_statusBar)
+        self.statTimer.start(10)
 
-    # def setup_statusBar(self):
-    #     self.bar = self.statusBar()
-    #     self.bar
+    def setup_statusBar(self):
+        time = self.setup_UserTime()
+        self.controller.ship.time = time
+        self.statusBar().showMessage('Lives:{} | Time: {}'.format(self.controller.ship.lives, time))
 
     def setup_UserTime(self):
         time = self.display.userTime
-        if time % 60 == 0:
-            time = time/60
-            time = int(time)
-            time = str(time) + '00'
-            time = int(time)
-        if len(str(time)) >= 3:
-            showTime = str(time)[:-2] + ':' + str(time)[-2:]
+        if time/60 == 1:
+            self.display.minutes += 1
+            self.display.userTime = 0
+        if self.display.minutes != 0:
+            showTime = str(self.display.minutes)
+            if len(str(self.display.userTime)) == 1:
+                showTime = showTime + ':0' + str(self.display.userTime)
+            else:
+                showTime = showTime + ":" + str(self.display.userTime)
         else:
-            showTime = str(time)
+            showTime = str(self.display.userTime)
         return showTime
 
     def quit(self):

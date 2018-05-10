@@ -11,39 +11,44 @@ class Controller(object):
         self.ship = Ship(None, 4, 4, 460, 770)
         self.obstacles = []
         self.world = World()
-        self.keys = []
+        self.keys = {
+            "right" : False,
+            "left" : False,
+            "up" : False,
+            "down" : False}
         self.screenWidth = None
 
     def move_ship_right(self, pixels):
         loc = self.ship.move("right", pixels)
         self.world.update_ship_position(loc, self.ship.height, self.ship.width)
-        self.keys.append("right")
         self.ship.move("right", pixels)
 
     def move_ship_left(self, pixels):
         loc = self.ship.move("left", pixels)
-        self.world.update_ship_position(loc, self.ship.height, self.ship.width)
-        self.keys.append("left")
+        self.world.update_positions(loc, self.ship.height, self.ship.width)
         self.ship.move("left", pixels)
 
     def move_ship_forward(self, pixels):
         loc = self.ship.move("forward", pixels)
-        self.world.update_ship_position(loc, self.ship.height, self.ship.width)
-        self.keys.append("up")
+        self.world.update_positions(loc, self.ship.height, self.ship.width)
         self.ship.move("forward", pixels)
 
     def move_ship_back(self, pixels):
         loc = self.ship.move("back", pixels)
-        self.world.update_ship_position(loc, self.ship.height, self.ship.width)
-        self.keys.append("down")
+        self.world.update_positions(loc, self.ship.height, self.ship.width)
         self.ship.move("back", pixels)
 
     def create_obstacle(self):
         sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50]]
         size = sizes[randint(0, 7)]
         obstacle = Mobile(None, size[0], size[1], 0, 0)
+        self.world.update_obstacle_position(obstacle.loc, obstacle.height, obstacle.width)
         return obstacle
 
+    def create_ship(self):
+        image = "test.png"
+        ship = Ship(image, 10, 10, 500, 100)
+        self.ship = ship
 
     def move_obstacles(self):
         pixels = 10

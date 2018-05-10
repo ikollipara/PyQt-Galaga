@@ -12,7 +12,7 @@ class World(object):
         for obstacle in self.controller.obstacles:
             bottomleft = (int(obstacle.loc[0] - (obstacle.width / 2)), int(obstacle.loc[1] + (obstacle.height / 2)))
             topRight = (int(obstacle.loc[0] + (obstacle.width / 2)), int(obstacle.loc[1] - (obstacle.height / 2)))
-            locations = [bottomleft, topRight]
+            locations = (bottomleft, topRight)
             self.obstacleLocations.append(locations)
 
     def update_ship_position(self, location, height, width):
@@ -26,12 +26,23 @@ class World(object):
         for obstacleLocation in self.obstacleLocations:
             bottomLeftX = obstacleLocation[0][0]
             bottomLeftY = obstacleLocation[0][1]
+            topRightX = obstacleLocation[1][0]
+            topRightY = obstacleLocation[0][1]
             if type(self.shipLocations) == type([]):
                 if bottomLeftX >= self.shipLocations[0][0] and bottomLeftX <= self.shipLocations[1][0]:
                     print("X")
                     if bottomLeftY >= self.shipLocations[1][1] and bottomLeftY <= self.shipLocations[0][1]:
                         collided = True
-                        print("OOOOOOOOOOOOOO")
+                    if topRightY >= self.shipLocations[1][1] and topRightY <= self.shipLocations[0][1]:
+                        collided = True
+                if topRightX >= self.shipLocations[0][0] and topRightX <= self.shipLocations[1][0]:
+                    print("Y")
+                    if bottomLeftY >= self.shipLocations[1][1] and bottomLeftY <= self.shipLocations[0][1]:
+                        collided = True
+                    if topRightY >= self.shipLocations[1][1] and topRightY <= self.shipLocations[0][1]:
+                        collided = True
+            if collided == True:
+                print("\nOOOOOOOOOO\n")
         return collided
 
 

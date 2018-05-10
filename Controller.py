@@ -51,9 +51,10 @@ class Controller(object):
         pixels = 10
         for obs in self.obstacles:
             obs.move(pixels)
-            self.world.update_obstacle_positions()
             if obs.y > self.screenWidth:
                 self.obstacles.remove(obs)
+        self.world.update_obstacle_positions()
+
 
     def lose_life(self):
         bool = self.world.detect_collision()

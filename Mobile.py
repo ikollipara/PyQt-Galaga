@@ -31,7 +31,6 @@ class Mobile(object):
    def lose_life(self):
        """Removes one life to ship lives"""
        self.lives -= 1
-       return self.lives
 
    def gain_life(self):
        """Adds one life to ship lives"""

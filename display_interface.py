@@ -15,7 +15,8 @@ class GameWindow(QtWidgets.QMainWindow):
         self.display.show()
         self.create_actions()
         self.create_menus()
-        # self.setup_statusBar()
+        self.setup_statusBar()
+        self.statusTimer()
 
 
     def setup_window(self):
@@ -41,22 +42,29 @@ class GameWindow(QtWidgets.QMainWindow):
         self.menu.addAction(self.scoresAction)
         self.menu.addAction(self.aboutAction)
 
+    def statusTimer(self):
+        self.statTimer = QtCore.QTimer()
+        self.statTimer.timeout.connect(self.setup_statusBar)
+        self.statTimer.start(10)
 
-    # def setup_statusBar(self):
-    #     self.bar = self.statusBar()
-    #     self.bar
+    def setup_statusBar(self):
+        time = self.setup_UserTime()
+        self.controller.ship.time = time
+        self.statusBar().showMessage('Lives:{} | Time: {}'.format(self.controller.ship.lives, time))
 
     def setup_UserTime(self):
         time = self.display.userTime
-        if time % 60 == 0:
-            time = time/60
-            time = int(time)
-            time = str(time) + '00'
-            time = int(time)
-        if len(str(time)) >= 3:
-            showTime = str(time)[:-2] + ':' + str(time)[-2:]
+        if time/60 == 1:
+            self.display.minutes += 1
+            self.display.userTime = 0
+        if self.display.minutes != 0:
+            showTime = str(self.display.minutes)
+            if len(str(self.display.userTime)) == 1:
+                showTime = showTime + ':0' + str(self.display.userTime)
+            else:
+                showTime = showTime + ":" + str(self.display.userTime)
         else:
-            showTime = str(time)
+            showTime = str(self.display.userTime)
         return showTime
 
     def quit(self):
@@ -72,25 +80,39 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
 
 
     def keyPressEvent(self, event):
-        if event.key() in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
-            pixels = 10
-            if self.controller.ship.x > self.width():
-                pixels = self.width() - self.controller.ship.x
-            self.controller.move_ship_right(pixels)
-            self.update()
-        elif event.key() in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
-            pixels = 10
-            if not self.controller.ship.x < 0:
-                self.controller.move_ship_left(pixels)
-            self.update()
-        elif event.key() in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
-            pixels = 10
-            if not self.controller.ship.y < 0:
-                self.controller.move_ship_forward(pixels)
-            self.update()
-        elif event.key() in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
-            pixels = 10
-            if self.controller.ship.y > self.height():
-                pixels = self.height() - self.controller.ship.y
-            self.controller.move_ship_back(pixels)
-            self.update()
+        #
+        #   connect method to timer in order for movement to work
+        #       updates values correctly. timer must see if controller.keys[value] == True
+        #       while value == True: move_ship (simplified method in
+        #
+        key = event.key()
+        if key in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
+            self.controller.keys["right"] = True
+            direction = "right"
+        elif key in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
+            self.controller.keys["left"] = True
+            direction = "left"
+        elif key in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
+            self.controller.keys["up"] = True
+            direction = "up"
+        elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
+            self.controller.keys["down"] = True
+            direction = "down"
+        loc = self.controller.ship.move(direction, 10)
+        self.controller.world.update_ship_position(loc, self.controller.ship.height, self.controller.ship.width)
+        self.controller.ship.move(direction, 10)
+        print(self.controller.ship.loc)
+
+
+    def keyReleaseEvent(self, event):
+        key = event.key()
+        if not event.isAutoRepeat():
+            if key in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
+                self.controller.keys["right"] = False
+            elif key in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
+                self.controller.keys["left"] = False
+            elif key in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
+                self.controller.keys["up"] = False
+            elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
+                self.controller.keys["down"] = False
+

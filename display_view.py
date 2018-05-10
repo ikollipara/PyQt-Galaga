@@ -8,6 +8,7 @@ class MainWidget(QtWidgets.QWidget):
     def __init__(self, controller, parent=None):
         super(MainWidget, self).__init__(parent)
         self.userTime = 0
+        self.minutes = 0
         self.controller = controller
         self.background = QtGui.QImage(self.width(), self.height(), QtGui.QImage.Format_RGB32)
         #self.background = QtGui.QPixmap('.\Images\Tie-dye.jpg')
@@ -17,7 +18,7 @@ class MainWidget(QtWidgets.QWidget):
         self.screen_timer()
         self.user_timer()
         self.game_timer()
-        self.collision_timer()
+
 
     def setup_obs_creation_timer(self):
         self.Timer = QtCore.QTimer()
@@ -36,13 +37,9 @@ class MainWidget(QtWidgets.QWidget):
 
     def game_timer(self):
         self.gTimer = QtCore.QTimer()
+        self.gTimer.timeout.connect(self.controller.lose_life)
         self.gTimer.timeout.connect(self.update)
         self.gTimer.start(10)
-
-    def collision_timer(self):
-        self.cTimer = QtCore.QTimer()
-        self.cTimer.timeout.connect(self.controller.world.detect_collision)
-        self.cTimer.start(10)
 
     def add_second(self):
         self.userTime += 1

@@ -12,6 +12,7 @@ class Ship(Mobile):
    def __init__(self, image, height, width, x, y, lives=3):
        """ Inherits __init__ from Mobile class. Always starts with 3 lives instead of 1."""
        super().__init__(image, height, width, x, y, lives=3)
+       self.time = None
 
    def move(self, direction, pixels):
        """Moves ship on screen and resets ship location"""
@@ -19,9 +20,9 @@ class Ship(Mobile):
            self.x -= pixels
        elif direction == 'right':
            self.x += pixels
-       elif direction == 'forward':
+       elif direction == 'up':
            self.y -= pixels
-       elif direction == 'back':
+       elif direction == 'down':
            self.y += pixels
        self.loc = [self.x, self.y]
        return self.loc

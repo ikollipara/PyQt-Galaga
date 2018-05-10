@@ -10,7 +10,7 @@ class Controller(object):
     def __init__(self):
         self.ship = Ship(None, 4, 4, 460, 770)
         self.obstacles = []
-        self.world = World()
+        self.world = World(self)
         self.keys = {
             "right" : False,
             "left" : False,
@@ -37,7 +37,7 @@ class Controller(object):
         sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50], [250, 250]]
         size = sizes[randint(0, len(sizes)-1)]
         obstacle = Mobile(None, size[0], size[1], 0, 0)
-        self.world.update_obstacle_position(obstacle.loc, obstacle.height, obstacle.width)
+        self.world.update_obstacle_positions()
         return obstacle
 
     def create_ship(self):
@@ -49,7 +49,7 @@ class Controller(object):
         pixels = 10
         for obs in self.obstacles:
             obs.move(pixels)
-            self.world.update_obstacle_position(obs.loc, obs.height, obs.width)
+            self.world.update_obstacle_positions()
             if obs.y > self.screenWidth:
                 self.obstacles.remove(obs)
 
@@ -59,3 +59,4 @@ class Controller(object):
             self.ship.lose_life()
         else:
             pass
+

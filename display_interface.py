@@ -101,7 +101,6 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
         loc = self.controller.ship.move(direction, 10)
         self.controller.world.update_ship_position(loc, self.controller.ship.height, self.controller.ship.width)
         self.controller.ship.move(direction, 10)
-        print(self.controller.ship.loc)
 
 
     def keyReleaseEvent(self, event):

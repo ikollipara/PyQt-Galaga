@@ -53,11 +53,9 @@ class Controller(object):
             if obs.y > self.screenWidth:
                 self.obstacles.remove(obs)
 
-
     def lose_life(self):
-        collided = self.world.detect_collision()
-        if collided:
-            self.ship.lose_life()
-        else:
-            pass
+        self.world.detect_collision()
+
+    def remove_obstacle(self, obstacle):
+        self.obstacles.remove(obstacle)
 

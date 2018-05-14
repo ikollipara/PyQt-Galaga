@@ -14,8 +14,8 @@ class MainWidget(QtWidgets.QWidget):
         #self.background = QtGui.QPixmap('.\Images\Tie-dye.jpg')
         self.background.fill(1)
         self.ship = QtGui.QPixmap('.\Images\ShipIcon.PNG')
-        # self.ship = QtGui.QImage(self.controller.ship.width, self.controller.ship.height, QtGui.QImage.Format_RGB32)
-        # self.ship.fill(QtGui.QColor('#006666'))
+        #self.shipBox = QtGui.QImage(self.controller.ship.width, self.controller.ship.height, QtGui.QImage.Format_RGB32)
+        #self.shipBox.fill(QtGui.QColor('#006666'))
         self.setup_obs_creation_timer()
         self.screen_timer()
         self.user_timer()
@@ -39,7 +39,7 @@ class MainWidget(QtWidgets.QWidget):
 
     def game_timer(self):
         self.gTimer = QtCore.QTimer()
-        self.gTimer.timeout.connect(self.controller.lose_life)
+        self.gTimer.timeout.connect(self.controller.world.detect_collision)
         self.gTimer.timeout.connect(self.update)
         self.gTimer.start(10)
 
@@ -66,7 +66,7 @@ class MainWidget(QtWidgets.QWidget):
         painter.drawImage(0, 0, self.background)
         #painter.drawPixmap(0, 0, self.background)
         painter.drawPixmap(self.controller.ship.loc[0], self.controller.ship.loc[1], self.ship)
-        #painter.drawImage(self.controller.ship.loc[0], self.controller.ship.loc[1], self.ship)
+        #painter.drawImage(self.controller.ship.loc[0], self.controller.ship.loc[1], self.shipBox)
         if len(self.controller.obstacles) > 0:
             for obstacle in self.controller.obstacles:
                 painter.drawImage(obstacle.x, obstacle.y, obstacle.image)

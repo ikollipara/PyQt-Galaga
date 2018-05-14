@@ -53,6 +53,7 @@ class World(object):
         else:
             shipBox = self.create_collision_box(self.controller.ship.box)
             for obs in self.controller.obstacles:
+                collision = 0
                 obsBox = self.create_collision_box(obs.box)
                 for pixel in obsBox[0]:
                     if pixel in shipBox[0]:
@@ -65,11 +66,9 @@ class World(object):
                             collision += 1
                         else: pass
                 if collision == 2:
-                    collided = True
-                else:
-                    collided = False
-                    collision = 0
-        return collided
+                    self.controller.remove_obstacle(obs)
+                    self.controller.ship.lose_life()
+
 
     def create_collision_box(self, boxList):
         topLeft = boxList[0]

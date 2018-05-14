@@ -66,7 +66,9 @@ class World(object):
                         else: pass
                 if collision == 2:
                     collided = True
-                    print(collided)
+                else:
+                    collided = False
+                    collision = 0
         return collided
 
     def create_collision_box(self, boxList):

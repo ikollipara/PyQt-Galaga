@@ -8,7 +8,7 @@ from random import randint
 
 class Controller(object):
     def __init__(self):
-        self.ship = Ship(None, 50, 56, 460, 770)
+        self.ship = Ship(None, 46, 40, 460, 770)
         self.obstacles = []
         self.world = World(self)
         self.world = World(self)

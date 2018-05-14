@@ -23,7 +23,7 @@ class Controller(object):
         #
         #   simplified into 1 method as opposed to 4
         #
-        pixels = 10
+        pixels = self.controller.check_borders()
         directions = []
         for key in self.keys:
             if key.value == True:
@@ -32,7 +32,6 @@ class Controller(object):
             while self.keys[direction] == True:
                 loc = self.ship.move(direction, pixels)
                 #self.world.update_ship_position()
-
 
     def create_obstacle(self):
         sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50]]

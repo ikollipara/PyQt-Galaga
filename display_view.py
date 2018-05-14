@@ -21,7 +21,6 @@ class MainWidget(QtWidgets.QWidget):
         self.user_timer()
         self.game_timer()
 
-
     def setup_obs_creation_timer(self):
         self.Timer = QtCore.QTimer()
         self.Timer.timeout.connect(self.paint_obstacles)
@@ -56,8 +55,6 @@ class MainWidget(QtWidgets.QWidget):
         color = colors[randint(0, len(colors)-1)]
         obs.image.fill(QtGui.QColor(color))
         self.controller.obstacles.append(obs)
-
-
 
     def paintEvent(self, QPaintEvent):
         painter = QtGui.QPainter(self)

@@ -69,7 +69,6 @@ class World(object):
                     self.controller.remove_obstacle(obs)
                     self.controller.ship.lose_life()
 
-
     def create_collision_box(self, boxList):
         topLeft = boxList[0]
         topRight = [boxList[1][0], boxList[0][1]]

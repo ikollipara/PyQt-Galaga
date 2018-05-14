@@ -98,9 +98,8 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
         elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
             self.controller.keys["down"] = True
             direction = "down"
-        loc = self.controller.ship.move(direction, 10)
-        self.controller.world.update_ship_position(loc, self.controller.ship.height, self.controller.ship.width)
-        self.controller.ship.move(direction, 10)
+        loc = self.controller.ship.move(direction, 20)
+        self.controller.world.update_ship_position()
 
 
     def keyReleaseEvent(self, event):

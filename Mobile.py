@@ -16,6 +16,7 @@ class Mobile(object):
        self.width = width
        self.loc = [self.x, self.y]
        self.lives = lives
+       self.box = None
 
    def change_image(self, image):
        """Changes image is the image file(png, jpeg, jpg,etc.) used for the object"""

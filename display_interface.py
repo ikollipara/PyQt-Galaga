@@ -88,13 +88,13 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
         key = event.key()
         if key in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
             self.controller.keys["right"] = True
-            #direction = "right"
+            direction = "right"
         elif key in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
             self.controller.keys["left"] = True
-            #direction = "left"
+            direction = "left"
         elif key in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
             self.controller.keys["up"] = True
-            #direction = "up"
+            direction = "up"
         elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
             self.controller.keys["down"] = True
             #direction = "down"

@@ -8,7 +8,7 @@ from random import randint
 
 class Controller(object):
     def __init__(self):
-        self.ship = Ship(None, 20, 20, 460, 770)
+        self.ship = Ship(None, 50, 56, 460, 770)
         self.obstacles = []
         self.world = World(self)
         self.world = World(self)
@@ -52,9 +52,6 @@ class Controller(object):
             self.world.update_obstacle_positions(obs)
             if obs.y > self.screenWidth:
                 self.obstacles.remove(obs)
-
-    def lose_life(self):
-        self.world.detect_collision()
 
     def remove_obstacle(self, obstacle):
         self.obstacles.remove(obstacle)

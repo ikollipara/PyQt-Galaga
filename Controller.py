@@ -5,6 +5,8 @@ from Mobile import Mobile
 from Ship import Ship
 from World import World
 from random import randint
+from Bullet import Bullet
+
 
 class Controller(object):
     def __init__(self):
@@ -18,12 +20,13 @@ class Controller(object):
             "up" : False,
             "down" : False}
         self.screenWidth = None
+        self.screenHeight = None
 
     def move_ship(self):
         #
         #   simplified into 1 method as opposed to 4
         #
-        pixels = 10
+        pixels = self.controller.check_borders()
         directions = []
         for key in self.keys:
             if key.value == True:
@@ -32,7 +35,6 @@ class Controller(object):
             while self.keys[direction] == True:
                 loc = self.ship.move(direction, pixels)
                 #self.world.update_ship_position()
-
 
     def create_obstacle(self):
         sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50]]
@@ -55,4 +57,21 @@ class Controller(object):
 
     def remove_obstacle(self, obstacle):
         self.obstacles.remove(obstacle)
+
+    def can_shoot(self, seconds):
+        if seconds >= 2:
+            return True
+        else:
+            return False
+
+    def create_bullet(self):
+        self.ship.bullet = Bullet(None, 10, 10, self.ship.x, self.ship.y)
+
+    def shoot(self):
+        while self.ship.bullet.y >= self.screenHeight:
+            self.ship.bullet.move(3)
+            self.world.update_bullet_position()
+
+    def remove_bullet(self):
+        self.ship.bullet = None
 

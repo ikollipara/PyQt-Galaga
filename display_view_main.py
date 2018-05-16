@@ -42,7 +42,6 @@ class MainWidget(QtWidgets.QWidget):
         self.gTimer.timeout.connect(self.controller.world.detect_collision)
         self.gTimer.start(10)
 
-
     def add_second(self):
         self.userTime += 1
 
@@ -51,6 +50,8 @@ class MainWidget(QtWidgets.QWidget):
         self.controller.screenWidth = self.width()
         obs.x = randint(0, self.width()-obs.width)
         obs.y = 0 - obs.height
+        self.controller.screenHeight = self.height()
+        obs.x = randint(0, self.width())
         obs.image = QtGui.QImage(obs.width, obs.height, QtGui.QImage.Format_RGB32)
         colors = ['#b0c56f', '#ffd700', '#cc0000', '#a43931', '#006666', '#ff66cd', '#bdc3c7', '#350715', '#6f85c5',
                   '#7eb546', '#19a35e', '#663399']
@@ -58,6 +59,17 @@ class MainWidget(QtWidgets.QWidget):
         obs.image.fill(QtGui.QColor(color))
         self.controller.obstacles.append(obs)
 
+    def paint_bullet(self):
+        self.controller.create_bullet()
+        bullet = self.controller.ship.bullet
+        self.controller.screenWidth = self.width()
+        # bullet.x = self.controller.ship.x
+        # bullet.y = self.controller.ship.y
+        bullet.image = QtGui.QImage(bullet.width, bullet.height, QtGui.QImage.Format_RGB32)
+        colors = ['#b0c56f', '#ffd700', '#cc0000', '#a43931', '#006666', '#ff66cd', '#bdc3c7', '#350715', '#6f85c5',
+                  '#7eb546', '#19a35e', '#663399']
+        color = colors[randint(0, len(colors) - 1)]
+        bullet.image.fill(QtGui.QColor(color))
 
 
     def paintEvent(self, QPaintEvent):
@@ -71,6 +83,8 @@ class MainWidget(QtWidgets.QWidget):
         if len(self.controller.obstacles) > 0:
             for obstacle in self.controller.obstacles:
                 painter.drawImage(obstacle.x, obstacle.y, obstacle.image)
+        if self.controller.ship.bullet != None:
+            painter.drawImage(self.controller.ship.bullet.loc[0], self.controller.ship.bullet.loc[1], self.controller.ship.bullet.image)
 
 
 

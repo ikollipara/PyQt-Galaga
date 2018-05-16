@@ -25,6 +25,12 @@ class World(object):
         bottomRight = [self.controller.ship.loc[0]+self.controller.ship.width, self.controller.ship.loc[1]+self.controller.ship.height]
         self.controller.ship.box = [topLeft, bottomRight]
 
+    def update_bullet_position(self):
+        topLeft = self.controller.ship.bullet.loc
+        bottomRight = [self.controller.ship.bullet.loc[0] + self.controller.ship.bullet.width,
+                       self.controller.ship.bullet.loc[1] + self.controller.ship.bullet.height]
+        self.controller.ship.bullet.box = [topLeft, bottomRight]
+
     def detect_collision(self):
         collided = False
         collision = 0
@@ -69,6 +75,28 @@ class World(object):
                     self.controller.remove_obstacle(obs)
                     self.controller.ship.lose_life()
 
+        if self.controller.ship.bullet == None:
+            pass
+        elif self.controller.ship.bullet.box == None:
+            pass
+        else:
+            bulletBox = self.create_collision_box(self.controller.ship.bullet.box)
+            for obs in self.controller.obstacles:
+                collision = 0
+                bulletBox = self.create_collision_box(self.controller.ship.bullet.box)
+                for pixel in bulletBox[0]:
+                    if pixel in bulletBox[0]:
+                        if collision == 0:
+                            collision += 1
+                        else: pass
+                for pixel in bulletBox[1]:
+                    if pixel in bulletBox[1]:
+                        if collision == 1:
+                            collision += 1
+                        else: pass
+                if collision == 2:
+                    self.controller.remove_obstacle(obs)
+                    self.controller.remove_bullet()
 
     def create_collision_box(self, boxList):
         topLeft = boxList[0]

@@ -14,8 +14,8 @@ class MainWidget(QtWidgets.QWidget):
         #self.background = QtGui.QPixmap('.\Images\Tie-dye.jpg')
         self.background.fill(1)
         self.ship = QtGui.QPixmap('.\Images\ShipIcon.PNG')
-        self.shipBox = QtGui.QImage(self.controller.ship.width, self.controller.ship.height, QtGui.QImage.Format_RGB32)
-        self.shipBox.fill(QtGui.QColor('#006666'))
+        #self.shipBox = QtGui.QImage(self.controller.ship.width, self.controller.ship.height, QtGui.QImage.Format_RGB32)
+        #self.shipBox.fill(QtGui.QColor('#006666'))
         self.setup_obs_creation_timer()
         self.screen_timer()
         self.user_timer()
@@ -63,7 +63,7 @@ class MainWidget(QtWidgets.QWidget):
         painter.drawImage(0, 0, self.background)
         #painter.drawPixmap(0, 0, self.background)
         painter.drawPixmap(self.controller.ship.loc[0], self.controller.ship.loc[1], self.ship)
-        painter.drawImage(self.controller.ship.loc[0], self.controller.ship.loc[1], self.shipBox)
+        #painter.drawImage(self.controller.ship.loc[0], self.controller.ship.loc[1], self.shipBox)
         if len(self.controller.obstacles) > 0:
             for obstacle in self.controller.obstacles:
                 painter.drawImage(obstacle.x, obstacle.y, obstacle.image)

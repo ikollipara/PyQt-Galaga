@@ -5,6 +5,8 @@ from Mobile import Mobile
 from Ship import Ship
 from World import World
 from random import randint
+from Bullet import Bullet
+
 
 class Controller(object):
     def __init__(self):
@@ -54,4 +56,19 @@ class Controller(object):
 
     def remove_obstacle(self, obstacle):
         self.obstacles.remove(obstacle)
+
+    def can_shoot(self, seconds):
+        if seconds >= 2:
+            return True
+        else:
+            return False
+
+    def shoot(self, screenYWidth=900):
+        self.ship.bullet = Bullet(10, 10, self.ship.x, self.ship.y)
+        while self.ship.bullet.y >= screenYWidth:
+            self.ship.bullet.move(3)
+            self.world.update_bullet_position()
+
+    def remove_bullet(self):
+        self.ship.bullet = None
 

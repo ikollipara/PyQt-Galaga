@@ -14,6 +14,7 @@ class Ship(Mobile):
        super().__init__(image, height, width, x, y, lives=3)
        self.time = None
        self.box = None
+       self.bullet = None
 
    def move(self, direction, pixels):
        """Moves ship on screen and resets ship location"""

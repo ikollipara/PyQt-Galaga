@@ -20,6 +20,7 @@ class Controller(object):
             "up" : False,
             "down" : False}
         self.screenWidth = None
+        self.screenHeight = None
 
     def move_ship(self):
         #
@@ -66,8 +67,8 @@ class Controller(object):
     def create_bullet(self):
         self.ship.bullet = Bullet(None, 10, 10, self.ship.x, self.ship.y)
 
-    def shoot(self, screenYWidth=900):
-        while self.ship.bullet.y >= screenYWidth:
+    def shoot(self):
+        while self.ship.bullet.y >= self.screenHeight:
             self.ship.bullet.move(3)
             self.world.update_bullet_position()
 

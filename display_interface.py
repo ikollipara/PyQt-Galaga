@@ -123,11 +123,11 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
             loc = self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_Space]:
-            self.display.paint_bullet()
             canShoot = self.controller.can_shoot(self.display.userTime)
             if canShoot:
+                print("S")
+                self.display.paint_bullet()
                 self.controller.shoot()
-        pixels = self.check_borders()
 
     #def processKeyEvent(self, event):
     #    isPress = event.modifiers()

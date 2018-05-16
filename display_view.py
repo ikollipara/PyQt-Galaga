@@ -49,6 +49,7 @@ class MainWidget(QtWidgets.QWidget):
     def paint_obstacles(self):
         obs = self.controller.create_obstacle()
         self.controller.screenWidth = self.width()
+        self.controller.screenHeight = self.height()
         obs.x = randint(0, self.width())
         obs.image = QtGui.QImage(obs.width, obs.height, QtGui.QImage.Format_RGB32)
         colors = ['#b0c56f', '#ffd700', '#cc0000', '#a43931', '#006666', '#ff66cd', '#bdc3c7', '#350715', '#6f85c5',
@@ -81,6 +82,8 @@ class MainWidget(QtWidgets.QWidget):
         if len(self.controller.obstacles) > 0:
             for obstacle in self.controller.obstacles:
                 painter.drawImage(obstacle.x, obstacle.y, obstacle.image)
+        if self.controller.ship.bullet != None:
+            painter.drawImage(self.controller.ship.bullet.loc[0], self.controller.ship.bullet.loc[1], self.controller.ship.bullet.image)
 
 
 

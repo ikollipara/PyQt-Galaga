@@ -1,6 +1,7 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
 from Controller import Controller
-from display_view import MainWidget
+from display_view_main import MainWidget
+from display_view_game_over import GameOver
 from random import *
 import sys
 
@@ -10,14 +11,17 @@ class GameWindow(QtWidgets.QMainWindow):
         self.app = app
         self.controller = Controller()
         self.setup_window()
-        self.display = MainWidget(self.controller)
-        self.setCentralWidget(self.display)
-        self.display.show()
+        self.setDisplay(MainWidget)
         self.create_actions()
         self.create_menus()
         self.setup_statusBar()
         self.statusTimer()
 
+
+    def setDisplay(self, Class):
+        self.display = Class(self.controller)
+        self.setCentralWidget(self.display)
+        self.display.show()
 
     def setup_window(self):
         xSize = 1000
@@ -45,12 +49,21 @@ class GameWindow(QtWidgets.QMainWindow):
     def statusTimer(self):
         self.statTimer = QtCore.QTimer()
         self.statTimer.timeout.connect(self.setup_statusBar)
+        self.statTimer.timeout.connect(self.screen_update)
         self.statTimer.start(10)
 
+
     def setup_statusBar(self):
-        time = self.setup_UserTime()
-        self.controller.ship.time = time
-        self.statusBar().showMessage('Lives:{} | Time: {}'.format(self.controller.ship.lives, time))
+        if type(self.display) == type(MainWidget):
+            time = self.setup_UserTime()
+            self.controller.ship.time = time
+            self.statusBar().showMessage('Lives:{} | Time: {}'.format(self.controller.ship.lives, time))
+
+    def screen_update(self):
+        if self.controller.ship.lives > 0:
+            self.display.update()
+        else:
+            self.setDisplay(GameOver)
 
     def setup_UserTime(self):
         time = self.display.userTime

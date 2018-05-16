@@ -57,6 +57,17 @@ class MainWidget(QtWidgets.QWidget):
         obs.image.fill(QtGui.QColor(color))
         self.controller.obstacles.append(obs)
 
+    def paint_bullet(self):
+        self.controller.create_bullet()
+        bullet = self.controller.ship.bullet
+        self.controller.screenWidth = self.width()
+        # bullet.x = self.controller.ship.x
+        # bullet.y = self.controller.ship.y
+        bullet.image = QtGui.QImage(bullet.width, bullet.height, QtGui.QImage.Format_RGB32)
+        colors = ['#b0c56f', '#ffd700', '#cc0000', '#a43931', '#006666', '#ff66cd', '#bdc3c7', '#350715', '#6f85c5',
+                  '#7eb546', '#19a35e', '#663399']
+        color = colors[randint(0, len(colors) - 1)]
+        bullet.image.fill(QtGui.QColor(color))
 
 
     def paintEvent(self, QPaintEvent):

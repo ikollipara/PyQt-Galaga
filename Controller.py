@@ -64,8 +64,10 @@ class Controller(object):
         else:
             return False
 
+    def create_bullet(self):
+        self.ship.bullet = Bullet(None, 10, 10, self.ship.x, self.ship.y)
+
     def shoot(self, screenYWidth=900):
-        self.ship.bullet = Bullet(10, 10, self.ship.x, self.ship.y)
         while self.ship.bullet.y >= screenYWidth:
             self.ship.bullet.move(3)
             self.world.update_bullet_position()

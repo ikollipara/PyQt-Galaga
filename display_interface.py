@@ -89,17 +89,28 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
         if key in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
             self.controller.keys["right"] = True
             direction = "right"
+            loc = self.controller.ship.move(direction, 20)
+            self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
             self.controller.keys["left"] = True
             direction = "left"
+            loc = self.controller.ship.move(direction, 20)
+            self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
             self.controller.keys["up"] = True
             direction = "up"
+            loc = self.controller.ship.move(direction, 20)
+            self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
             self.controller.keys["down"] = True
             direction = "down"
-        loc = self.controller.ship.move(direction, 20)
-        self.controller.world.update_ship_position()
+            loc = self.controller.ship.move(direction, 20)
+            self.controller.world.update_ship_position()
+        elif key in [QtCore.Qt.Key_Space]:
+            self.display.paint_bullet()
+            canShoot = self.controller.can_shoot(self.display.userTime)
+            if canShoot:
+                self.controller.shoot()
 
 
     def keyReleaseEvent(self, event):
@@ -113,4 +124,6 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
                 self.controller.keys["up"] = False
             elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
                 self.controller.keys["down"] = False
+            elif key in [QtCore.Qt.Key_Space]:
+                pass
 

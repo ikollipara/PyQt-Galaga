@@ -75,19 +75,21 @@ class World(object):
                     self.controller.remove_obstacle(obs)
                     self.controller.ship.lose_life()
 
-        if self.controller.ship.box == None:
+        if self.controller.ship.bullet == None:
+            pass
+        elif self.controller.ship.bullet.box == None:
             pass
         else:
             bulletBox = self.create_collision_box(self.controller.ship.bullet.box)
             for obs in self.controller.obstacles:
                 collision = 0
-                obsBox = self.create_collision_box(obs.box)
-                for pixel in obsBox[0]:
+                bulletBox = self.create_collision_box(self.controller.ship.bullet.box)
+                for pixel in bulletBox[0]:
                     if pixel in bulletBox[0]:
                         if collision == 0:
                             collision += 1
                         else: pass
-                for pixel in obsBox[1]:
+                for pixel in bulletBox[1]:
                     if pixel in bulletBox[1]:
                         if collision == 1:
                             collision += 1

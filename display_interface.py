@@ -79,13 +79,14 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
 
     def check_borders(self):
         self.pixels = 20
-        if self.controller.ship.x > self.width():
+        keys = self.controller.keys
+        if keys["right"] == True and self.controller.ship.x + 20 > (self.width() - 40):
             self.pixels = 0
-        if self.controller.ship.x < 0:
+        if keys["left"] == True and self.controller.ship.x - 20 < 0:
             self.pixels = 0
-        if self.controller.ship.y < 0:
+        if keys["up"] == True and self.controller.ship.y < 0:
             self.pixels = 0
-        if self.controller.ship.y > self.height() - ship.y:
+        if keys["down"] == True and self.controller.ship.y > (self.height() - 100):
             self.pixels = 0
         return self.pixels
 

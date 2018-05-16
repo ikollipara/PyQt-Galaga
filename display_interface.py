@@ -101,22 +101,26 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
         if key in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
             self.controller.keys["right"] = True
             direction = "right"
-            loc = self.controller.ship.move(direction, 20)
+            pixels = self.check_borders()
+            loc = self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
             self.controller.keys["left"] = True
             direction = "left"
-            loc = self.controller.ship.move(direction, 20)
+            pixels = self.check_borders()
+            loc = self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
             self.controller.keys["up"] = True
             direction = "up"
-            loc = self.controller.ship.move(direction, 20)
+            pixels = self.check_borders()
+            loc = self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
             self.controller.keys["down"] = True
             direction = "down"
-            loc = self.controller.ship.move(direction, 20)
+            pixels = self.check_borders()
+            loc = self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_Space]:
             self.display.paint_bullet()
@@ -124,8 +128,6 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
             if canShoot:
                 self.controller.shoot()
         pixels = self.check_borders()
-        loc = self.controller.ship.move(direction, pixels)
-        self.controller.world.update_ship_position()
 
     #def processKeyEvent(self, event):
     #    isPress = event.modifiers()

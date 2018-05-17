@@ -52,26 +52,25 @@ class Controller(object):
         for obs in self.obstacles:
             obs.move(10)
             self.world.update_obstacle_positions(obs)
-            if obs.y > self.screenWidth:
+            if obs.y > self.screenHeight:
                 self.obstacles.remove(obs)
 
     def remove_obstacle(self, obstacle):
         self.obstacles.remove(obstacle)
 
-    def can_shoot(self, seconds):
-        if seconds >= 2:
-            return True
-        else:
-            return False
 
     def create_bullet(self):
-        self.ship.bullet = Bullet(None, 10, 10, self.ship.x, self.ship.y)
+        x = int(self.ship.loc[0] + self.ship.width/2)
+        y = 1 + self.ship.loc[1]
+        bullet = Bullet(None, 10, 10, x, y)
+        self.world.update_bullet_position(bullet)
+        return bullet
 
-    def shoot(self):
-        while self.ship.bullet.y >= self.screenHeight:
-            self.ship.bullet.move(3)
-            self.world.update_bullet_position()
+    def move_bullets(self):
+        for bullet in self.ship.bullets:
+            bullet.move(10)
+            self.world.update_bullet_position(bullet)
+            if bullet.loc[1] < 0:
+                self.ship.bullets.remove(bullet)
 
-    def remove_bullet(self):
-        self.ship.bullet = None
 

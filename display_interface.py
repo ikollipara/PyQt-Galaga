@@ -52,12 +52,12 @@ class GameWindow(QtWidgets.QMainWindow):
         self.statTimer.timeout.connect(self.screen_update)
         self.statTimer.start(10)
 
-
     def setup_statusBar(self):
-        if type(self.display) == type(MainWidget):
+        if type(self.display) == MainWidget:
             time = self.setup_UserTime()
             self.controller.ship.time = time
             self.statusBar().showMessage('Lives:{} | Time: {}'.format(self.controller.ship.lives, time))
+
 
     def screen_update(self):
         if self.controller.ship.lives > 0:
@@ -104,6 +104,7 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
             self.pixels = 0
         return self.pixels
 
+
     def keyPressEvent(self, event):
         #
         #   connect method to timer in order for movement to work
@@ -136,11 +137,9 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
             loc = self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_Space]:
-            canShoot = self.controller.can_shoot(self.display.userTime)
-            if canShoot:
-                print("S")
-                self.display.paint_bullet()
-                self.controller.shoot()
+            self.display.paint_bullet()
+
+
 
     #def processKeyEvent(self, event):
     #    isPress = event.modifiers()

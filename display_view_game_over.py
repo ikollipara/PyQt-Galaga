@@ -7,13 +7,12 @@ class GameOver(QtWidgets.QWidget):
         self.background.fill(QtGui.QColor('#000000'))
         self.GameOver = QtWidgets.QLabel(self)
         self.GameOver.setPixmap(QtGui.QPixmap('.\Images\Game Over.PNG'))
+        self.NameBox = QtWidgets.QLineEdit()
         self.controller = controller
-        self.NameBox = QtWidgets.QLineEdit(self)
         self.highScore = QtWidgets.QLabel()
         self.highScore.setText(self.controller.ship.time)
         self.setup_layout()
         self.update()
-
 
     def setup_layout(self):
         vLayout = QtWidgets.QVBoxLayout()
@@ -22,10 +21,14 @@ class GameOver(QtWidgets.QWidget):
         hLayoutOne.addStretch()
         hLayoutOne.addWidget(self.GameOver)
         hLayoutOne.addStretch()
+        hLayoutTwo.addStretch()
         hLayoutTwo.addWidget(self.NameBox)
-        hLayoutTwo.addWidget(self.highScore)
+        hLayoutTwo.addStretch()
+        vLayout.addStretch()
         vLayout.addLayout(hLayoutOne)
+        vLayout.addStretch()
         vLayout.addLayout(hLayoutTwo)
+        vLayout.addStretch()
         self.setLayout(vLayout)
 
     def paintEvent(self, QPaintEvent):

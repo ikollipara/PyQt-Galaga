@@ -11,4 +11,3 @@ class Bullet(Mobile):
         #
         self.y -= pixels
         self.loc = [self.x, self.y]
-        return self.loc

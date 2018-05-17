@@ -30,7 +30,9 @@ class MainWidget(QtWidgets.QWidget):
     def screen_timer(self):
         self.moveTimer = QtCore.QTimer()
         self.moveTimer.timeout.connect(self.controller.move_obstacles)
+        self.moveTimer.timeout.connect(self.controller.move_bullets)
         self.moveTimer.start(60)
+
 
     def user_timer(self):
         self.uTimer = QtCore.QTimer()
@@ -39,7 +41,8 @@ class MainWidget(QtWidgets.QWidget):
 
     def game_timer(self):
         self.gTimer = QtCore.QTimer()
-        self.gTimer.timeout.connect(self.controller.world.detect_collision)
+        self.gTimer.timeout.connect(self.controller.world.detect_ship_collision)
+        self.gTimer.timeout.connect(self.controller.world.detect_bullet_collision)
         self.gTimer.start(10)
 
     def add_second(self):
@@ -60,17 +63,14 @@ class MainWidget(QtWidgets.QWidget):
         self.controller.obstacles.append(obs)
 
     def paint_bullet(self):
-        self.controller.create_bullet()
-        bullet = self.controller.ship.bullet
-        self.controller.screenWidth = self.width()
-        # bullet.x = self.controller.ship.x
-        # bullet.y = self.controller.ship.y
+        bullet = self.controller.create_bullet()
+        self.controller.screenHeight = self.height()
         bullet.image = QtGui.QImage(bullet.width, bullet.height, QtGui.QImage.Format_RGB32)
         colors = ['#b0c56f', '#ffd700', '#cc0000', '#a43931', '#006666', '#ff66cd', '#bdc3c7', '#350715', '#6f85c5',
                   '#7eb546', '#19a35e', '#663399']
         color = colors[randint(0, len(colors) - 1)]
         bullet.image.fill(QtGui.QColor(color))
-
+        self.controller.ship.bullets.append(bullet)
 
     def paintEvent(self, QPaintEvent):
         painter = QtGui.QPainter(self)
@@ -83,8 +83,9 @@ class MainWidget(QtWidgets.QWidget):
         if len(self.controller.obstacles) > 0:
             for obstacle in self.controller.obstacles:
                 painter.drawImage(obstacle.x, obstacle.y, obstacle.image)
-        if self.controller.ship.bullet != None:
-            painter.drawImage(self.controller.ship.bullet.loc[0], self.controller.ship.bullet.loc[1], self.controller.ship.bullet.image)
+        if len(self.controller.ship.bullets) > 0:
+            for bullet in self.controller.ship.bullets:
+                painter.drawImage(bullet.x, bullet.y, bullet.image)
 
 
 

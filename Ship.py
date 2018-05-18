@@ -1,8 +1,6 @@
 from PyQt5.QtCore import QByteArray
 
-
 from Mobile import Mobile
-
 
 class Ship(Mobile):
    """This is what the user controls"""

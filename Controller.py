@@ -11,6 +11,7 @@ from Bullet import Bullet
 class Controller(object):
     def __init__(self):
         self.ship = Ship(None, 46, 40, 460, 770)
+        self.obstSpeed = 10
         self.obstacles = []
         self.world = World(self)
         self.world = World(self)
@@ -50,14 +51,13 @@ class Controller(object):
 
     def move_obstacles(self):
         for obs in self.obstacles:
-            obs.move(10)
+            obs.move(self.obstSpeed)
             self.world.update_obstacle_positions(obs)
             if obs.y > self.screenHeight:
                 self.obstacles.remove(obs)
 
     def remove_obstacle(self, obstacle):
         self.obstacles.remove(obstacle)
-
 
     def create_bullet(self):
         x = int(self.ship.loc[0] + self.ship.width/2)
@@ -68,7 +68,7 @@ class Controller(object):
 
     def move_bullets(self):
         for bullet in self.ship.bullets:
-            bullet.move(10)
+            bullet.move(30)
             self.world.update_bullet_position(bullet)
             if bullet.loc[1] < 0:
                 self.ship.bullets.remove(bullet)

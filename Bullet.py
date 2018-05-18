@@ -1,4 +1,5 @@
 from Mobile import Mobile
+
 class Bullet(Mobile):
     def __init__(self, image, height, width, x, y, lives=1):
         super().__init__(image, height, width, x, y, lives=1)

@@ -6,6 +6,7 @@ from display_view_opening import Opening
 from random import *
 import sys
 
+
 class GameWindow(QtWidgets.QMainWindow):
     def __init__(self, app):
         super(GameWindow, self).__init__()
@@ -17,7 +18,6 @@ class GameWindow(QtWidgets.QMainWindow):
         self.create_menus()
         self.setup_statusBar()
         self.statusTimer()
-
 
     def setDisplay(self, Class):
         self.display = Class(self.controller)
@@ -40,7 +40,6 @@ class GameWindow(QtWidgets.QMainWindow):
         self.aboutAction = QtWidgets.QAction("&About", self, statusTip="More information about the program", triggered=self.about)
         self.scoresAction = QtWidgets.QAction('H&igh Scores', self, statusTip='Current High Scores', triggered=self.high_scores)
         self.lifeAction = QtWidgets.QAction(QtGui.QIcon('.\Images\Hearts.PNG'), "Life", self)
-
 
     def create_menus(self):
         self.menu = self.menuBar()
@@ -113,68 +112,44 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
             self.pixels = 0
         return self.pixels
 
-
     def keyPressEvent(self, event):
         #
-        #   connect method to timer in order for movement to work
-        #       updates values correctly. timer must see if controller.keys[value] == True
-        #       while value == True: move_ship (simplified method in
+        # Method to remove delay?
+        #
+        #   setup a boolean on keyPressEvent, and possibly also ignoring all repeated key events.
+        # That you can do by checking the repeat member of the key event.
+        # Then you could implement your own timer,
+        # which doesn't have to be anything fancy, and implement key repetition your self.
+        # You could either trigger the action directly from the timer,
+        # or even generate an SDL_KEYDOWN event, and unify the solutions.
         #
         key = event.key()
         if key in [QtCore.Qt.Key_D, QtCore.Qt.Key_Right]:
             self.controller.keys["right"] = True
             direction = "right"
             pixels = self.check_borders()
-            loc = self.controller.ship.move(direction, pixels)
+            self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_A, QtCore.Qt.Key_Left]:
             self.controller.keys["left"] = True
             direction = "left"
             pixels = self.check_borders()
-            loc = self.controller.ship.move(direction, pixels)
+            self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_W, QtCore.Qt.Key_Up]:
             self.controller.keys["up"] = True
             direction = "up"
             pixels = self.check_borders()
-            loc = self.controller.ship.move(direction, pixels)
+            self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_S, QtCore.Qt.Key_Down]:
             self.controller.keys["down"] = True
             direction = "down"
             pixels = self.check_borders()
-            loc = self.controller.ship.move(direction, pixels)
+            self.controller.ship.move(direction, pixels)
             self.controller.world.update_ship_position()
         elif key in [QtCore.Qt.Key_Space]:
             self.display.paint_bullet()
-
-
-
-    #def processKeyEvent(self, event):
-    #    isPress = event.modifiers()
-    #    key = event.key()
-    #    directions  = {
-    #        "right":[QtCore.Qt.Key_D, QtCore.Qt.Key_Right],
-    #        "left":[QtCore.Qt.Key_A, QtCore.Qt.Key_Left],
-    #        "up":[QtCore.Qt.Key_W, QtCore.Qt.Key_Up],
-    #        "down":[QtCore.Qt.Key_S, QtCore.Qt.Key_Down]
-    #    }
-    #    if key in directions["right"]:
-    #        direction = "right"
-    #    elif key in directions["left"]:
-    #        direction = "left"
-    #    elif key in directions["up"]:
-    #        direction = "up"
-    #    elif key in directions["down"]:
-    #        direction = "down"
-    #    pixels = 10
-    #    if isPress == True:
-    #        loc = self.controller.ship.move(direction, pixels)
-    #        self.controller.world.update_ship_position(loc, self.controller.ship.height, self.controller.ship.width)
-    #        self.controller.ship.move(direction, pixels)
-    #        self.update()
-    #    else:
-    #        pass
 
     def keyReleaseEvent(self, event):
         key = event.key()
@@ -189,5 +164,4 @@ Ian, Tessa, and Collin over the course of 4 weeks""")
                 self.controller.keys["down"] = False
             elif key in [QtCore.Qt.Key_Space]:
                 pass
-
         self.pixels = 20

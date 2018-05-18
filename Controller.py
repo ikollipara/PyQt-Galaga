@@ -73,4 +73,5 @@ class Controller(object):
             if bullet.loc[1] < 0:
                 self.ship.bullets.remove(bullet)
 
-
+    def high_scores(self):
+        pass

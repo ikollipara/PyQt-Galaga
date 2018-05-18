@@ -2,6 +2,7 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 from Controller import Controller
 from display_view_main import MainWidget
 from display_view_game_over import GameOver
+from display_view_opening import Opening
 from random import *
 import sys
 
@@ -11,7 +12,7 @@ class GameWindow(QtWidgets.QMainWindow):
         self.app = app
         self.controller = Controller()
         self.setup_window()
-        self.setDisplay(MainWidget)
+        self.setDisplay(Opening)
         self.create_actions()
         self.create_menus()
         self.setup_statusBar()
@@ -50,6 +51,7 @@ class GameWindow(QtWidgets.QMainWindow):
         self.statTimer = QtCore.QTimer()
         self.statTimer.timeout.connect(self.setup_statusBar)
         self.statTimer.timeout.connect(self.screen_update)
+        self.statTimer.timeout.connect(self.start)
         self.statTimer.start(10)
 
     def setup_statusBar(self):
@@ -58,11 +60,18 @@ class GameWindow(QtWidgets.QMainWindow):
             self.controller.ship.time = time
             self.statusBar().showMessage('Lives:{} | Time: {}'.format(self.controller.ship.lives, time))
 
+    def start(self):
+        if type(self.display) == Opening:
+            if self.display.go:
+                self.setDisplay(MainWidget)
+            else: pass
+        else: pass
 
     def screen_update(self):
         if self.controller.ship.lives > 0:
             self.display.update()
         else:
+            self.statTimer.stop()
             self.setDisplay(GameOver)
 
     def setup_UserTime(self):

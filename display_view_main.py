@@ -21,18 +21,16 @@ class MainWidget(QtWidgets.QWidget):
         self.user_timer()
         self.game_timer()
 
-
     def setup_obs_creation_timer(self):
         self.Timer = QtCore.QTimer()
         self.Timer.timeout.connect(self.paint_obstacles)
-        self.Timer.start(500)
+        self.Timer.start(475)
 
     def screen_timer(self):
         self.moveTimer = QtCore.QTimer()
         self.moveTimer.timeout.connect(self.controller.move_obstacles)
         self.moveTimer.timeout.connect(self.controller.move_bullets)
         self.moveTimer.start(60)
-
 
     def user_timer(self):
         self.uTimer = QtCore.QTimer()
@@ -47,6 +45,8 @@ class MainWidget(QtWidgets.QWidget):
 
     def add_second(self):
         self.userTime += 1
+        if self.userTime % 20 == 0:
+            self.controller.obstSpeed += 3
 
     def paint_obstacles(self):
         obs = self.controller.create_obstacle()

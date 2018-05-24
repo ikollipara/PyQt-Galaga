@@ -43,7 +43,6 @@ class GameWindow(QtWidgets.QMainWindow):
 
     def create_menus(self):
         self.menu = self.menuBar()
-        self.menu.addAction(self.scoresAction)
         self.menu.addAction(self.aboutAction)
 
     def statusTimer(self):

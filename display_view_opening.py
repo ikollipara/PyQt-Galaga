@@ -17,8 +17,6 @@ class Opening(QtWidgets.QWidget):
         self.start = QtWidgets.QPushButton()
         self.start.setText('Start')
         self.start.clicked.connect(self.startGame)
-        self.highScores = QtWidgets.QPushButton()
-        self.highScores.setText('High Scores')
 
 
 
@@ -30,8 +28,6 @@ class Opening(QtWidgets.QWidget):
         hLayoutTwo = QtWidgets.QHBoxLayout()
         hLayoutTwo.addStretch()
         hLayoutTwo.addWidget(self.start)
-        hLayoutTwo.addStretch()
-        hLayoutTwo.addWidget(self.highScores)
         hLayoutTwo.addStretch()
         layout = QtWidgets.QVBoxLayout()
         layout.addStretch()

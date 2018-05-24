@@ -35,7 +35,7 @@ class Controller(object):
         for direction in directions:
             while self.keys[direction] == True:
                 loc = self.ship.move(direction, pixels)
-                #self.world.update_ship_position()
+                self.world.update_ship_position()
 
     def create_obstacle(self):
         sizes = [[100, 200], [200, 100], [50, 250], [250, 50], [100, 100], [50, 50], [50, 100], [100, 50]]

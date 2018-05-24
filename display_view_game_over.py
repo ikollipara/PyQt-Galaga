@@ -50,9 +50,45 @@ class GameOver(QtWidgets.QWidget):
         vBoxTotal.addStretch()
         self.setLayout(vBoxTotal)
 
+    def create_score(self):
+        counter = 0
+        playerName = self.NameBox.text()
+        score = self.controller.ship.time
+        if ':' in score:
+            testScore = score.split(':')
+            testScore = int(str(testScore[0]) + str(testScore[1]))
+        else: testScore = score
+        testTimes, times, names = self.get_score()
+        for time in testTimes:
+            if testScore > int(time):
+                index = counter
+                break
+            else: counter += 1
+        names.insert(index, playerName)
+        times.insert(index, score)
+        self.add_scores(names, times)
 
+    def get_score(self):
+        times = []
+        testTimes = []
+        names = []
+        with open('HighScores', 'r') as f:
+            for line in f:
+                name, time, n = line.split(',')
+                if ':' in time:
+                    testTime = time.split(':')
+                    testTime = int(str(testTime[0]) + str(testTime[1]))
+                else: testTime = int(time)
+                names.append(name)
+                times.append(time)
+                testTimes.append(testTime)
+        return testTimes, times, names
 
-
-
-
-
+    def add_scores(self, names, times):
+        string = ''
+        counter = 0
+        for name in names:
+            string += '{},{},\n'.format(name, times[counter])
+            counter += 1
+        with open('HighScores', 'w') as f:
+            f.write(string)

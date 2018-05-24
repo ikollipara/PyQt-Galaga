@@ -6,21 +6,12 @@ class World(object):
 
     def update_obstacle_positions(self, obs):
         """Finds the top right and bottom left coordinates or the object and appends them"""
-        # self.obstacleLocations = []
-        # for obstacle in self.controller.obstacles:
-        #     bottomleft = (int(obstacle.loc[0] - (obstacle.width / 2)), int(obstacle.loc[1] + (obstacle.height / 2)))
-        #     topRight = (int(obstacle.loc[0] + (obstacle.width / 2)), int(obstacle.loc[1] - (obstacle.height / 2)))
-        #     locations = (bottomleft, topRight)
-        #     self.obstacleLocations.append(locations)
         topLeft = obs.loc
         bottomRight = [obs.loc[0]+obs.width, obs.loc[1]+obs.height]
         obs.box = [topLeft, bottomRight]
 
     def update_ship_position(self):
         """Finds the top right and bottom left coordinates or the object and appends them"""
-        # bottomleft = (int(location[0] - (width / 2)), int(location[1] + (height / 2)))
-        # topRight = (int(location[0] + (width / 2)), int(location[1] - (height / 2)))
-        # self.shipLocations = [bottomleft, topRight]
         topLeft = self.controller.ship.loc
         bottomRight = [self.controller.ship.loc[0]+self.controller.ship.width, self.controller.ship.loc[1]+self.controller.ship.height]
         self.controller.ship.box = [topLeft, bottomRight]

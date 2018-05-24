@@ -34,7 +34,6 @@ Atario is a top-down action game. The game allows the user to shoot and move aro
 ## How to Use
 
 The first screen will prompt you to click start, do as such.
-PLACE IMAGE
+![Start Screen](Images/Start.PNG)
 This leads directly to the main game. The goal was alread mentioned above. The controls for the game are either WASD or the Arrow Keys for movement. The spacebar is for shooting bullets. 
-PLACE IMAGE
-
+![Bullets](Images/Bullets.PNG)

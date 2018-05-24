@@ -1,63 +1,40 @@
 # Atario
 
-## Summary
+## Description
+Atario is a top-down action game. The game allows the user to shoot and move around in cardinal directions. As the time goes on the blocks speed up, to add a gradual difficulty. The program was planned to have high scores, but those have sadly not yet been implemented. The goal is the longest survival.
 
-This program aims to create a Top-Down scroller in which you fly a plane around obstacles.
-You move with either the arrow keys or WASD. We plan to implement custom controls if possible.
-Scoring would either be through a traditional scoring system, or a longest time.
-We also want to add in enemies if possible, which also means that your ship could shoot.
-The interface will be made in PyQt to look like a native windows app.
+### PLACE IMAGE
 
 ## Features
+* WASD or Arrow Keys Controls
+* Spacebar to Shoot
+* Timekeeping
+* Collision
+* Live counter
 
-### Initial Features
+## Requirements
+* Python 3.6+
+* PyQt5+
+* Keyboard
+* Mouse
 
-* __Movement__- This means the ship can move in cardinal directions.
-The also means that the game loop works.
+## Installation
+1. PC
+  To install it on PC you have to:
+  * Extract the Zip
+  * Run main.py
+2. Mac
+  To install it on a Mac you have to:
+  * Extract the Zip
+  * Run main.py
+  There have been a few bugs with the Mac version, please send in any problems and we'll get right to fixing it. 
+3. Linux
+  There has been zero testing done on linux, and thus a version isn't available. 
 
-* __Obstacles__- There will be randomly spawned obstacles that the ship will need to avoid.
-If you hit one you will lose some of your life, culminating in a game over.
+## How to Use
 
-### Optional Features
+The first screen will prompt you to click start, do as such.
+PLACE IMAGE
+This leads directly to the main game. The goal was alread mentioned above. The controls for the game are either WASD or the Arrow Keys for movement. The spacebar is for shooting bullets. 
+PLACE IMAGE
 
-* Enemies
-* Ship Fire
-* Movement in Diagonals
-* Power-Ups
-* Difficulty
-
-## Interface
-
-![Basic Interface](Images/Specs_Interface.JPG)
-
-## Implementation
-
-### Ship Class
-
-#### Variables
-* Picture- The Image loaded for the Ship
-* Lives- Number of Lives left; Default is 3
-* Size- The Size of the ship in terms of pixels
-* Location- Pacement of the Ship on the screen in terms of pixels
-
-#### Methods
-* Move- Allow direction movement via key presses
-
-### Obstacle Class
-
-#### Variables
-* Location- Placement of the Obstacle
-* Picture- The Image loaded for the obstacle
-
-#### Methods
-* Move- Controls the object as it moves toward the end of the screen
-
-### Game Class
-
-#### Variables
-* User- Name of the User
-
-#### Methods
-* find_ship- sets the ship's new location
-* set_obst- Creates and places an obstacle
-* adj_life- Changes the Ship's life count

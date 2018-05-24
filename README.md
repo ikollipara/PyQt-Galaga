@@ -3,7 +3,7 @@
 ## Description
 Atario is a top-down action game. The game allows the user to shoot and move around in cardinal directions. As the time goes on the blocks speed up, to add a gradual difficulty. The program was planned to have high scores, but those have sadly not yet been implemented. The goal is the longest survival.
 
-![Base Example](PyQt-Galaga/Images/Gameplay 1.PNG )
+![Base Example](Images/Gameplay.PNG)
 
 ## Features
 * WASD or Arrow Keys Controls

@@ -37,3 +37,5 @@ The first screen will prompt you to click start, do as such.
 ![Start Screen](Images/Start.PNG)
 This leads directly to the main game. The goal was alread mentioned above. The controls for the game are either WASD or the Arrow Keys for movement. The spacebar is for shooting bullets. 
 ![Bullets](Images/Bullets.PNG)
+The Game ends when the user has zero lives, then this screen appears
+![Game Over](Images/Game Over Screen.PNG)

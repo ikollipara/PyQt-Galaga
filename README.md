@@ -3,7 +3,7 @@
 ## Description
 Atario is a top-down action game. The game allows the user to shoot and move around in cardinal directions. As the time goes on the blocks speed up, to add a gradual difficulty. The program was planned to have high scores, but those have sadly not yet been implemented. The goal is the longest survival.
 
-![Base Example](Images/Gameplay.PNG)
+![Base Example](src/images/Gameplay.PNG)
 
 ## Features
 * WASD or Arrow Keys Controls
@@ -34,8 +34,8 @@ Atario is a top-down action game. The game allows the user to shoot and move aro
 ## How to Use
 
 The first screen will prompt you to click start, do as such.
-![Start Screen](Images/Start.PNG)
+![Start Screen](src/images/Start.PNG)
 This leads directly to the main game. The goal was alread mentioned above. The controls for the game are either WASD or the Arrow Keys for movement. The spacebar is for shooting bullets. 
-![Bullets](Images/Bullets.PNG)
+![Bullets](src/images/Bullets.PNG)
 The Game ends when the user has zero lives, then this screen appears
-![Game Over](Images/GO.PNG)
+![Game Over](src/images/GO.PNG)
